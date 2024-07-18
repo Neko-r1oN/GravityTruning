@@ -4,10 +4,18 @@ using UnityEngine;
 
 public class HomeManager : MonoBehaviour
 {
-    // Start is called before the first frame update
+    [SerializeField] GameObject StartButton;
+    [SerializeField] GameObject BuckButton;
+    [SerializeField] GameObject StageSelector;
+
+    
+
     void Start()
     {
-        
+        StartButton.SetActive(true);
+        BuckButton.SetActive(false);
+        StageSelector.SetActive(false);
+
     }
 
     // Update is called once per frame
@@ -16,9 +24,33 @@ public class HomeManager : MonoBehaviour
         
     }
 
-    public void OnClickStartGame()
+    public void OnClickSelectStage()
     {
+        BuckButton.SetActive(true);
+        StageSelector.SetActive(true);
+
+        StartButton.SetActive(false);
+
+        
         // ÉVÅ[ÉìëJà⁄
-        Initiate.Fade("GameScene", new Color(0, 0, 0, 1.0f), 2.0f);
+        /*Initiate.Fade("GameScene", new Color(0, 0, 0, 1.0f), 2.0f);*/
+    }
+
+    public void OnClickSelectReturn()
+    {
+       
+
+        Invoke("CloseMenu", 0.5f);
+
+        
+
+    }
+
+    void CloseMenu()
+    {
+        StageSelector.SetActive(false);
+        BuckButton.SetActive(false);
+
+        StartButton.SetActive(true);
     }
 }
