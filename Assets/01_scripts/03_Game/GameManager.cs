@@ -9,11 +9,15 @@ public class GameManager : MonoBehaviour
     //アイテムのプレハブ
     [SerializeField] List<BubbleController> prefabBubbles;
     //UI
+
+    [SerializeField] Text stageText;
+    [SerializeField] Text goalText;
     [SerializeField] Text textScore;
     [SerializeField] GameObject panelResult;
     [SerializeField] GameObject panelStop;
 
     [SerializeField] int CrearMergeNum;    //クリアに必要な合成回数
+    [SerializeField] string goalTextMessage;    //クリアに必要な合成回数
     //サウンド
     [SerializeField] AudioClip seDrop;     //落下効果音
     [SerializeField] AudioClip seMerge;    //合体効果音
@@ -30,7 +34,6 @@ public class GameManager : MonoBehaviour
     AudioSource audioSource;
 
     static public string GaneScene;
-
     
 
     private void Start()
@@ -44,6 +47,11 @@ public class GameManager : MonoBehaviour
         //合計Merge数初期化
         MergeNum = 0;
 
+        //goalText = "ボール";
+       
+        stageText.text = "Stage:" + StageSelect.stageID;
+        goalText.text = goalTextMessage;
+
         GaneScene = "GameScene";
 
         //最初のアイテムを生成
@@ -52,63 +60,7 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        //アイテムがなければ実行しない
-        if (!currentBubble) return;
-
-        //マウスポジション(スクリーン座標)からワールド座標に変換
-        Vector2 worldPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-
-        //X座標をマウスに合わせる
-        Vector2 bubblePosition = new Vector2(worldPoint.x, SpawnItemY);
-        currentBubble.transform.position = bubblePosition;
-
-        //タッチ処理
-        if(Input.GetMouseButtonUp(0))
-        {
-            //重力をセットしてドロップ
-            currentBubble.GetComponent<Rigidbody2D>().gravityScale = 1;
-            //所持アイテムリセット
-            currentBubble = null;
-            //次のアイテム
-            StartCoroutine(SpawnCurrentItem());
-            //SE再生
-            //audioSource.PlayOneShot(seDrop);
-
-        }
     }
-
-    //アイテム生成
-    //BubbleController SpawnItem(Vector2 position, int colorType = -1)
-    //{
-        //色ランダム
-        //int index = Random.Range(0, prefabBubbles.Count / 2);
-
-        //色の指定があれば上書き
-        //if(0 < colorType)
-        //{
-            //index = colorType;
-        //}
-        //生成
-        //BubbleController bubble = Instantiate(prefabBubbles[index], position, Quaternion.identity);
-
-        //必要データセット
-        //bubble.SceneDirector = this;
-        //bubble.ColorType = index;
-
-        //return bubble;
-    //}
-
-    //所持アイテム生成
-    IEnumerator SpawnCurrentItem()
-    {
-        //指定された秒数待つ
-        yield return new WaitForSeconds(1.0f);
-        //生成されたアイテムを保持する
-        //currentBubble = SpawnItem(new Vector2(0, SpawnItemY));
-        //落ちないように重力を0にする
-        currentBubble.GetComponent<Rigidbody2D>().gravityScale = 0;
-    }
-
 
     //アイテムを合体させる
     public void Merge(BubbleController bubbleA,BubbleController bubbleB)

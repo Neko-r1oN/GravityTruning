@@ -12,9 +12,13 @@ public class BubbleController : MonoBehaviour
     //‡‘ÌÏ‚İƒtƒ‰ƒO
     public bool IsMerged;
 
+    
+
     // Update is called once per frame
     void Update()
     {
+        
+       
         //‰æ–ÊŠO‚É—‚¿‚½‚çÁ‚·
         if (transform.position.y < -10)
         {
