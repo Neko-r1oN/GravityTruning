@@ -7,17 +7,14 @@ EditorBuildSettings:
   m_Scenes:
   - enabled: 1
     path: Assets/02_Scene/TitleScene.unity
-    guid: a6fbc3ff6e880ce449d2d1e5ba024323
+    guid: c153d0bbff860134bbc7d3e4bf8ddae0
   - enabled: 1
     path: Assets/02_Scene/HomeScene.unity
-    guid: 62f7e690fd1bb9446b3b75a731e75f1b
+    guid: 246e0b42eba950547aa335bfe32e8bf4
   - enabled: 1
     path: Assets/02_Scene/GameStages/GameScene1.unity
-    guid: 22e54bb5d51852a4785c4accfab40110
-  - enabled: 1
-    path: Assets/02_Scene/GameStages/GameScene2.unity
-    guid: 82d15702ad8a0134e921ddd6a24f757b
+    guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
     path: Assets/02_Scene/GameResetScene.unity
-    guid: aeeec6257241d7e4588d0ec552ddd698
+    guid: 8eafdbb093072c341af7738c34ccfcae
   m_configObjects: {}
