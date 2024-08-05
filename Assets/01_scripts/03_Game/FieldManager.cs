@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 public class FieldManager : MonoBehaviour
 {
     [SerializeField] GameObject Gravity;
+    [SerializeField] GameObject Grid;
 
     private bool TurnL;
     private bool TurnR;
@@ -33,6 +34,7 @@ public class FieldManager : MonoBehaviour
 
         if (TurnL == true || Input.GetKeyDown(KeyCode.RightArrow))
         {
+            CancelInvoke("ResetGrid");
             Angle -= 60f;
 
 
@@ -40,21 +42,25 @@ public class FieldManager : MonoBehaviour
             //左
             //transform.Rotate(0f, 0f, -60f * Time.deltaTime);
 
-
+            Invoke("ResetGrid", 0.7f);
         }
 
 
         if (TurnR == true || Input.GetKeyDown(KeyCode.LeftArrow))
         {
+            CancelInvoke("ResetGrid");
             Angle += 60f;
 
             TurnR = false;
             //右
             //transform.Rotate(0f, 0f, 60f * Time.deltaTime);
+            Invoke("ResetGrid", 0.7f);
 
         }
 
         this.transform.DORotate(new Vector3(-4.869f, 0f, Angle), 0.3f);
+
+       
     }
 
 
@@ -75,7 +81,7 @@ public class FieldManager : MonoBehaviour
 
             // 一定時間経過後に解除
             StartCoroutine(EnableButton());
-
+            Grid.SetActive(false);
             TurnL = true;
         }
     }
@@ -96,7 +102,7 @@ public class FieldManager : MonoBehaviour
 
             // 一定時間経過後に解除
             StartCoroutine(EnableButton());
-
+            Grid.SetActive(false);
             TurnR = true;
         }
     }
@@ -108,16 +114,27 @@ public class FieldManager : MonoBehaviour
         {
             Gravity.SetActive(false);
             isGravity = false;
+
+            Invoke("ResetGravity", 1.0f);
         }
         else
         {
-            Gravity.SetActive(true);
-            isGravity = true;
+           
         }
 
-
-
     }
+
+    private void ResetGravity()
+    {
+        Gravity.SetActive(true);
+        isGravity = true;
+    }
+
+    private void ResetGrid()
+    {
+        Grid.SetActive(true);
+    }
+
     // ボタンの制限を解除するコルーチン
     private IEnumerator EnableButton()
     {

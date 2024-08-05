@@ -38,6 +38,8 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+
+        int NextStage = StageSelect.stageID;
         //サウンド再生用
         audioSource = GetComponent<AudioSource>();
         //リザルト画面を非表示
@@ -140,10 +142,12 @@ public class GameManager : MonoBehaviour
 
     public void OnClikNext()
     {
+        GaneScene = "GameScene";
         int NextStage = StageSelect.stageID + 1;
 
         GaneScene += NextStage;
         Debug.Log(GaneScene);
+        StageSelect.stageID = NextStage;
         // シーン遷移
         Initiate.Fade(GaneScene, new Color(0, 0, 0, 1), 2.0f);
 

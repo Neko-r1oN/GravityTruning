@@ -23,7 +23,7 @@ public class BubbleController : MonoBehaviour
         if (transform.position.y < -10)
         {
             // ƒV[ƒ“‘JˆÚ
-            Initiate.Fade("GameScene", new Color(0, 0, 0, 0), 2.0f);
+            Initiate.Fade("GameResetScene", new Color(0, 0, 0, 1.0f), 5.0f);
         }
 
         
