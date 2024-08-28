@@ -7,6 +7,10 @@ public class BubbleController : MonoBehaviour
 {
     //シーンディレクター
     public GameManager SceneDirector;
+
+    //シーンディレクター
+    public SAGameManager SceneDirectorSA;
+
     //カラー
     public int ColorType;
     //合体済みフラグ
@@ -16,9 +20,7 @@ public class BubbleController : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
-        
-       
+    {        
         //画面外に落ちたら消す
         if (transform.position.y < -10)
         {
@@ -38,5 +40,6 @@ public class BubbleController : MonoBehaviour
 
         //合体させる
         SceneDirector.Merge(this, bubble);
+        
     }
 }

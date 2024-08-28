@@ -11,6 +11,7 @@ public class FieldManager : MonoBehaviour
 
     private bool TurnL;
     private bool TurnR;
+    private bool TurnFlag;
 
     private bool button;
     private float Angle;
@@ -18,43 +19,59 @@ public class FieldManager : MonoBehaviour
 
     private bool buttonEnabled = true;
     private WaitForSeconds waitOneSecond = new WaitForSeconds(0.3f);
+    
 
+    private int TurnNum;
 
     private void Start()
     {
         TurnL = false;
         TurnR = false;
+        TurnFlag = true;
         isGravity = true;
         Angle = 0f;
+        
     }
     // Update is called once per frame
     void Update()
     {
 
-
+        TurnNum = GameManager.MasterTurnNum;
         if (TurnL == true || Input.GetKeyDown(KeyCode.RightArrow))
         {
-            CancelInvoke("ResetGrid");
-            Angle -= 60f;
+          
+            if (TurnNum > 0 && TurnFlag == true)
+            {
+                GameManager.MasterTurnNum--;
+                TurnNum = GameManager.MasterTurnNum;
+                CancelInvoke("ResetGrid");
+                Angle -= 60f;
 
 
-            TurnL = false;
-            //左
-            //transform.Rotate(0f, 0f, -60f * Time.deltaTime);
+                TurnL = false;
+                //左
+                //transform.Rotate(0f, 0f, -60f * Time.deltaTime);
 
-            Invoke("ResetGrid", 0.7f);
+                Invoke("ResetGrid", 0.7f);
+            }
         }
 
 
         if (TurnR == true || Input.GetKeyDown(KeyCode.LeftArrow))
         {
-            CancelInvoke("ResetGrid");
-            Angle += 60f;
+           
+            if (TurnNum > 0 && TurnFlag == true)
+            {
+                GameManager.MasterTurnNum--;
+                TurnNum = GameManager.MasterTurnNum;
+                CancelInvoke("ResetGrid");
+                Angle += 60f;
 
-            TurnR = false;
-            //右
-            //transform.Rotate(0f, 0f, 60f * Time.deltaTime);
-            Invoke("ResetGrid", 0.7f);
+                TurnR = false;
+                //右
+                //transform.Rotate(0f, 0f, 60f * Time.deltaTime);
+                Invoke("ResetGrid", 0.7f);
+            }
 
         }
 
@@ -76,6 +93,8 @@ public class FieldManager : MonoBehaviour
         else
         {
 
+            Debug.Log(TurnNum);
+            TurnNum--;
             // ボタンを制限する
             buttonEnabled = false;
 
@@ -97,6 +116,8 @@ public class FieldManager : MonoBehaviour
         else
         {
 
+            Debug.Log(TurnNum);
+            TurnNum--;
             // ボタンを制限する
             buttonEnabled = false;
 
@@ -133,6 +154,10 @@ public class FieldManager : MonoBehaviour
     private void ResetGrid()
     {
         Grid.SetActive(true);
+        if (TurnNum <= 0)
+        {
+            TurnFlag = false;
+        }
     }
 
     // ボタンの制限を解除するコルーチン

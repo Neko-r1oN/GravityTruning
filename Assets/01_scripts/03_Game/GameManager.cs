@@ -13,18 +13,19 @@ public class GameManager : MonoBehaviour
     [SerializeField] Text stageText;
     [SerializeField] Text goalText;
     [SerializeField] Text textScore;
+    [SerializeField] Text TurnText;
     [SerializeField] GameObject panelResult;
     [SerializeField] GameObject panelStop;
 
-    [SerializeField] int CrearMergeNum;    //クリアに必要な合成回数
+    [SerializeField] int CrearMergeNum;         //クリアに必要な合成回数
+    [SerializeField] static public int MasterTurnNum { get; set; }              //残り回転可能回数
     [SerializeField] string goalTextMessage;    //クリアに必要な合成回数
     //サウンド
     [SerializeField] AudioClip seDrop;     //落下効果音
     [SerializeField] AudioClip seMerge;    //合体効果音
 
-    //スコア
-    int Score;
-    //
+    
+    public int TurnNum;
     int MergeNum;
     //現在のアイテム
     BubbleController currentBubble;
@@ -47,10 +48,10 @@ public class GameManager : MonoBehaviour
         //中断画面を非表示
         panelStop.SetActive(false);
         //合計Merge数初期化
-        MergeNum = 0;
+        MasterTurnNum = TurnNum;
 
         //goalText = "ボール";
-       
+
         stageText.text = "Stage:" + StageSelect.stageID;
         goalText.text = goalTextMessage;
 
@@ -62,6 +63,7 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
+        TurnText.text = ""+ MasterTurnNum;
     }
 
     //アイテムを合体させる
@@ -94,7 +96,7 @@ public class GameManager : MonoBehaviour
 
         //点数計算
         //Score += newBubble.ColorType * 10;
-        textScore.text = "" + Score;
+        //textScore.text = "" + Score;
 
         //Destroy(newBubble.gameObject);
         //SE再生
