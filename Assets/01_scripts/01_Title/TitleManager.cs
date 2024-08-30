@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 public class TitleManager : MonoBehaviour
 {
@@ -41,5 +42,24 @@ public class TitleManager : MonoBehaviour
                 Initiate.Fade("HomeScene", new Color(0, 0, 0, 1.0f), 2.0f);
             }
         }
+    }
+
+    IEnumerator checkCatalog()
+    {
+        var checkHandle = Addressables.CheckForCatalogUpdates(false);
+        yield return checkHandle;
+        var updates = checkHandle.Result;
+        Addressables.Release(checkHandle);
+
+        if(updates.Count >= 1)
+        {
+            Initiate.Fade("AssetLoader", new Color(0, 0, 0, 1.0f), 2.0f);
+        }
+        else
+        {
+            Initiate.Fade("HomeScene", new Color(0, 0, 0, 1.0f), 5.0f);
+        }
+
+
     }
 }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using DG.Tweening;                   //DOTweenを使うときはこのusingを入れる
 using System.Threading.Tasks;
 
@@ -19,7 +20,13 @@ public class SAFieldManager : MonoBehaviour
 
     private bool buttonEnabled = true;
     private WaitForSeconds waitOneSecond = new WaitForSeconds(0.3f);
-    
+
+    //開始カウントダウン
+    float CountDown = 5.0f;
+    //開始カウントダウン
+    float CountTimer = 40.0f;
+
+    private bool isGame;
 
     private void Start()
     {
@@ -28,107 +35,148 @@ public class SAFieldManager : MonoBehaviour
         TurnFlag = true;
         isGravity = true;
         Angle = 0f;
-        
+
+        isGame = false;
+
+
     }
     // Update is called once per frame
     void Update()
     {
-        if (TurnL == true || Input.GetKeyDown(KeyCode.RightArrow))
+        if (CountDown >= 0)
         {
-          
-            if (TurnFlag == true)
-            {
-                GameManager.MasterTurnNum--;
-                CancelInvoke("ResetGrid");
-                Angle -= 60f;
-
-
-                TurnL = false;
-                //左
-                //transform.Rotate(0f, 0f, -60f * Time.deltaTime);
-
-                Invoke("ResetGrid", 0.7f);
-            }
-        }
-
-
-        if (TurnR == true || Input.GetKeyDown(KeyCode.LeftArrow))
-        {
-           
-            if (TurnFlag == true)
-            {
-                GameManager.MasterTurnNum--;
-                CancelInvoke("ResetGrid");
-                Angle += 60f;
-
-                TurnR = false;
-                //右
-                //transform.Rotate(0f, 0f, 60f * Time.deltaTime);
-                Invoke("ResetGrid", 0.7f);
-            }
+            CountDown -= Time.deltaTime;
 
         }
 
-        this.transform.DORotate(new Vector3(-4.869f, 0f, Angle), 0.3f);
+        if (CountDown <= 0)
+        {
+            isGame = true;
 
-       
+            CountTimer -= Time.deltaTime;
+            //countdownが0以下になったとき
+            if (CountTimer <= 0)
+            {
+                isGame = false;
+            }
+
+            else
+            {
+
+            }
+
+            if (TurnL == true || Input.GetKeyDown(KeyCode.RightArrow))
+            {
+
+                if (TurnFlag == true)
+                {
+                    GameManager.MasterTurnNum--;
+                    CancelInvoke("ResetGrid");
+                    Angle -= 60f;
+
+
+                    TurnL = false;
+                    //左
+                    //transform.Rotate(0f, 0f, -60f * Time.deltaTime);
+
+                    Invoke("ResetGrid", 0.7f);
+                }
+            }
+
+
+            if (TurnR == true || Input.GetKeyDown(KeyCode.LeftArrow))
+            {
+
+                if (TurnFlag == true)
+                {
+                    GameManager.MasterTurnNum--;
+                    CancelInvoke("ResetGrid");
+                    Angle += 60f;
+
+                    TurnR = false;
+                    //右
+                    //transform.Rotate(0f, 0f, 60f * Time.deltaTime);
+                    Invoke("ResetGrid", 0.7f);
+                }
+
+            }
+
+            this.transform.DORotate(new Vector3(-4.869f, 0f, Angle), 0.3f);
+
+        }
+
+
     }
 
 
     public void TurnLeft()
     {
 
-        // 制限中は動作させない
-        if (buttonEnabled == false)
+        if (CountDown <= 0)
         {
-            return;
-        }
-        // 制限されていない場合
-        else
-        {
-            // ボタンを制限する
-            buttonEnabled = false;
+            if (isGame)
+            {
+                // 制限中は動作させない
+                if (buttonEnabled == false)
+                {
+                    return;
+                }
+                // 制限されていない場合
+                else
+                {
+                    // ボタンを制限する
+                    buttonEnabled = false;
 
-            // 一定時間経過後に解除
-            StartCoroutine(EnableButton());
-            Grid.SetActive(false);
-            TurnL = true;
+                    // 一定時間経過後に解除
+                    StartCoroutine(EnableButton());
+                    Grid.SetActive(false);
+                    TurnL = true;
+                }
+            }
         }
     }
 
     public void TurnRight()
     {
-        // 制限中は動作させない
-        if (buttonEnabled == false)
+        if (CountDown <= 0)
         {
-            return;
-        }
-        // 制限されていない場合
-        else
-        {        
-            // ボタンを制限する
-            buttonEnabled = false;
+            if (isGame)
+            {
+                // 制限中は動作させない
+                if (buttonEnabled == false)
+                {
+                    return;
+                }
+                // 制限されていない場合
+                else
+                {
+                    // ボタンを制限する
+                    buttonEnabled = false;
 
-            // 一定時間経過後に解除
-            StartCoroutine(EnableButton());
-            Grid.SetActive(false);
-            TurnR = true;
+                    // 一定時間経過後に解除
+                    StartCoroutine(EnableButton());
+                    Grid.SetActive(false);
+                    TurnR = true;
+                }
+            }
         }
     }
 
     public void GravityChange()
     {
 
-        if (isGravity)
+        if (CountDown <= 0)
         {
-            Gravity.SetActive(false);
-            isGravity = false;
+            if (isGame)
+            { 
+                if (isGravity)
+                {
+                    Gravity.SetActive(false);
+                    isGravity = false;
 
-            Invoke("ResetGravity", 1.0f);
-        }
-        else
-        {
-           
+                    Invoke("ResetGravity", 1.0f);
+                }
+            }
         }
 
     }

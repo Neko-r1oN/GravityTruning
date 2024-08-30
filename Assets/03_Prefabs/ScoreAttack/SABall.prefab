@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1993653454150267977}
   - component: {fileID: 7504242174127738795}
   - component: {fileID: 5012470268579185378}
-  - component: {fileID: 1503148405788826266}
+  - component: {fileID: 5557199612346284297}
   m_Layer: 3
   m_Name: SABall
   m_TagString: Untagged
@@ -149,7 +149,7 @@ CircleCollider2D:
   m_Offset: {x: -0.003635435, y: 0}
   serializedVersion: 2
   m_Radius: 0.48544577
---- !u!114 &1503148405788826266
+--- !u!114 &5557199612346284297
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -158,10 +158,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 3849304129044387699}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 27b72995f20ba244d93064f4e09448f2, type: 3}
+  m_Script: {fileID: 11500000, guid: 0f7ad03f9811001499ae1fcd701f5a35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scoreManager: {fileID: 0}
-  HitFlag: 0
-  posX: 0
-  posY: 0

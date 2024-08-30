@@ -2,26 +2,45 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
+using TMPro;
+
 public class ScoreManager : MonoBehaviour
 {
-    static public int Score { get; private set; }
+    
+    //スコア
+    static public int score { get; private set; }
 
-    int basicScore = 200;
+    //消したボール総数
+    static public int ballNum { get; private set; }
 
-    // Start is called before the first frame update
+    //基本ポイント
+    static public int basicScore { get; private set; }
+
+    //ポイント倍率
+    static public float pointScale { get; private set; }
+
+
     void Start()
     {
-        Score = 0;
+        pointScale = 1.0f;
+        basicScore = 200 *(int)pointScale;
+        score = 0;
+        ballNum = 0;
     }
 
-    // Update is called once per frame
+
     void Update()
     {
-        GetComponent<Text>().text = "" + Score;
+        GetComponent<Text>().text = "" + score;
+        //
     }
     public void AddScore()
     {
-        
-        Score += basicScore;
+
+        //スコア更新
+        score += basicScore;
+        ballNum++;
+
     }
 }

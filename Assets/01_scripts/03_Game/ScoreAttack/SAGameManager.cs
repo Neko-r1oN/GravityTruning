@@ -8,7 +8,18 @@ public class SAGameManager : MonoBehaviour
 {
     //アイテムのプレハブ
     [SerializeField] List<BubbleController> prefabBubbles;
-    //UI
+
+    //タイトル表示カウントダウン
+    float TitleCountDown = 3.0f;
+    
+    //開始カウントダウン
+    public Text CountText;
+    float CountDown = 4.0f;
+    int Count;
+
+    float SceneChangeCount = 2.0f;
+
+    [SerializeField] GameObject BG;
 
     [SerializeField] Text TimerText;
     [SerializeField] GameObject panelResult;
@@ -19,13 +30,8 @@ public class SAGameManager : MonoBehaviour
     [SerializeField] AudioClip seMerge;    //合体効果音
 
 
-    public int ScoreNum;
-
-    public int TurnNum;
-
-    //カウントダウン
-    public float countdown = 40;
-    BubbleController currentBubble;
+    //タイマー
+    public float CountTimer = 40;
 
     //Audio再生装置
     AudioSource audioSource;
@@ -44,61 +50,66 @@ public class SAGameManager : MonoBehaviour
         //中断画面を非表示
         panelStop.SetActive(false);
 
-        ScoreNum = 0;
-
+        BG.SetActive(true);
 
         GaneScene = "GameScene";
 
-        //最初のアイテムを生成
-        /*StartCoroutine(SpawnCurrentItem());*/
     }
 
     private void Update()
     {
-       
-       
-        //時間をカウントダウンする
-        countdown -= Time.deltaTime;
-      
-        //時間を表示する
-        TimerText.text = countdown.ToString("f1") + "";
-
-        //countdownが0以下になったとき
-        if (countdown <= 0)
+        if (TitleCountDown >= 1)
         {
-             TimerText.text = "0";
-        }
-    }
+            TitleCountDown -= Time.deltaTime;
+            CountText.text = "Score Attack";
 
-    //所持アイテム生成
-    IEnumerator SpawnCurrentItem()
-    {
-        //指定された秒数待つ
-        yield return new WaitForSeconds(1.0f);
-        //生成されたアイテムを保持する
-        currentBubble = SpawnItem(new Vector2(0, 0));
-        //落ちないように重力を0にする
-        currentBubble.GetComponent<Rigidbody2D>().gravityScale = 0;
-    }
-
-
-    BubbleController SpawnItem(Vector2 position,int colorType = 1)
-    {
-        int index = 1;
-        if(0<colorType)
-        {
-            index = colorType;
         }
 
-        BubbleController bubble = Instantiate(prefabBubbles[index], position, Quaternion.identity);
+        if (TitleCountDown <= 1)
+        {
+            if (CountDown >= 1)
+            {
+                CountDown -= Time.deltaTime;
+                Count = (int)CountDown;
+                CountText.text = Count.ToString();
 
-        bubble.SceneDirectorSA = this;
-        bubble.ColorType = index;
+            }
 
-        return bubble;
+            if (CountDown <= 1)
+            {
+                BG.SetActive(false);
+
+                CountText.text = "";
+
+                //時間をカウントダウンする
+                CountTimer -= Time.deltaTime;
+
+                //時間を表示する
+                TimerText.text = CountTimer.ToString("f1") + "";
+
+                //countdownが0以下になったとき
+                if (CountTimer <= 0)
+                {
+                    //時間を表示する
+                    TimerText.text = "0";
+                    BG.SetActive(true);
+
+                    CountText.text = "Finish";
+                    SceneChangeCount -= Time.deltaTime;
+
+                    if(SceneChangeCount <= 0)
+                    {
+                        // シーン遷移
+                        Initiate.Fade("ScoreResultScene", new Color(0, 0, 0, 1.0f), 5.0f);
+                    }
+
+                }
+            }
+        }
+        
 
     }
-
+       
     
     public void OnClikStop()
     {
