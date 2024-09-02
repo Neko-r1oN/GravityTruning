@@ -31,7 +31,7 @@ public class AssetLoader : MonoBehaviour
         yield return handle;
 
         //ダウンロード実行
-        AsyncOperationHandle downloadHandle = Addressables.DownloadDependenciesAsync("Default", false);
+        AsyncOperationHandle downloadHandle = Addressables.DownloadDependenciesAsync("default", false);
 
         while (downloadHandle.Status == AsyncOperationStatus.None)
         {
@@ -40,8 +40,11 @@ public class AssetLoader : MonoBehaviour
         }
         loadingSlider.value = 100;
         Addressables.Release(downloadHandle);
-        Addressables.Release(handle);
+        //Addressables.Release(handle);
 
         //次のシーンに移動
+
+        // シーン遷移
+        Initiate.Fade("HomeScene", new Color(0, 0, 0, 1.0f), 5.0f);
     }
 }

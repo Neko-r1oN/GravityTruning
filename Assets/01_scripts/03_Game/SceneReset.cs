@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
+using UnityEngine.SceneManagement;
 
 public class SceneReset : MonoBehaviour
 {
@@ -21,9 +23,10 @@ public class SceneReset : MonoBehaviour
 
         GaneScene += StageSelect.stageID;
         Debug.Log(GaneScene);
-        
+
         // ƒV[ƒ“‘JˆÚ
-        Initiate.Fade(GaneScene, new Color(0, 0, 0, 1.0f), 5.0f);
-        
+
+        Addressables.LoadScene(GaneScene, LoadSceneMode.Single);
+
     }
 }

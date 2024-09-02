@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.AddressableAssets;
+
 
 public class GameManager : MonoBehaviour
 {
@@ -151,7 +153,6 @@ public class GameManager : MonoBehaviour
         Debug.Log(GaneScene);
         StageSelect.stageID = NextStage;
         // ƒV[ƒ“‘JˆÚ
-        Initiate.Fade(GaneScene, new Color(0, 0, 0, 1), 2.0f);
-
+        Addressables.LoadScene(GaneScene, LoadSceneMode.Single);
     }
 }

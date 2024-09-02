@@ -3890,7 +3890,7 @@ MonoBehaviour:
   goalTextMessage: "\u76EE\u6A19:\u540C\u3058\u30DC\u30FC\u30EB\u3092\u5408\u4F53\u3055\u305B\u3088\u3046"
   seDrop: {fileID: 8300000, guid: 124f6a30adc2a314ba0524058dff5fc4, type: 3}
   seMerge: {fileID: 8300000, guid: 2e13a7b6b7b1add4d95000907bb28ea3, type: 3}
-  TurnNum: 9
+  TurnNum: 15
 --- !u!4 &1640549625
 Transform:
   m_ObjectHideFlags: 0
