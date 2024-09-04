@@ -10,6 +10,7 @@ namespace SnapScroll
 
         void Start()
         {
+            
             Application.targetFrameRate = 60;
             
             scrollView.OnPageChanged += OnIndicatorUpdate;

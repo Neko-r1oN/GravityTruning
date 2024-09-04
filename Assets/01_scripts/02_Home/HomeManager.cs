@@ -49,8 +49,11 @@ public class HomeManager : MonoBehaviour
         {
             SEManager.Instance.Play(SEPath.TAP);
         }
-            BGMVolume = BGMSlider.value;
-        SEVolume = SESlider.value;
+
+        //スライダーの値を音量に反映
+        BGMVolume = BGMSlider.value * 0.01f;
+        SEVolume = SESlider.value * 0.01f;
+
         //BGM全体のボリュームを変更
         BGMManager.Instance.ChangeBaseVolume(BGMVolume);
 
@@ -67,9 +70,6 @@ public class HomeManager : MonoBehaviour
 
         StartButton.SetActive(false);
 
-        
-        // シーン遷移
-        /*Initiate.Fade("GameScene", new Color(0, 0, 0, 1.0f), 2.0f);*/
     }
 
     public void OnClickSetting()

@@ -89,6 +89,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - default
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 977a8f740faf04447b6e663f0ed458b2
+    m_Address: ScoreAttackScene
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - default
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 73c01d18e5ddb694fbd882ae5f7a8651, type: 2}
   m_SchemaSet:

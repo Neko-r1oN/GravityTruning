@@ -10,8 +10,9 @@ public class NetworkManager : MonoBehaviour
 {
     //httpsí êMóp
     //https://api-gravityturning.japaneast.cloudapp.azure.com/
-
-    const string API_BASE_URL = "https://api-gravityturning.japaneast.cloudapp.azure.com//api/";
+    //https://api-gravityturning.japaneast.cloudapp.azure.com//api/
+    //http://localhost:8000/api
+    const string API_BASE_URL = "https://api-gravityturning.japaneast.cloudapp.azure.com/api/";
     private int userID = 0;
     private string userName = "";
     private string password = "";

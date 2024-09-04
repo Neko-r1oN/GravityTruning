@@ -15,7 +15,7 @@ MonoBehaviour:
   m_DefaultGroup: 6613a3daaf33b2d41bf076d6a8c76f6d
   m_currentHash:
     serializedVersion: 2
-    Hash: c612e92afa0f747facbfa0bea01c71b4
+    Hash: 96ffae32f44ecc6230a5d8d7e147deee
   m_OptimizeCatalogSize: 0
   m_BuildRemoteCatalog: 1
   m_BundleLocalCatalog: 0
@@ -81,7 +81,7 @@ MonoBehaviour:
       - m_Id: 3ecb3922ea1634e48bde81d7c3bf14f6
         m_Value: ServerData/[BuildTarget]
       - m_Id: f30fa71ca613ac6419ca21daf55d6649
-        m_Value: http://[PrivateIpAddress]:[HostingServicePort]
+        m_Value: https://graivityturning.blob.core.windows.net/puzzle-data/Android
     - m_InheritedParent: 
       m_Id: 2cdfa80875efa5e4f91fd6c5c0e1567b
       m_ProfileName: iOS
@@ -95,7 +95,7 @@ MonoBehaviour:
       - m_Id: 3ecb3922ea1634e48bde81d7c3bf14f6
         m_Value: ServerData/[BuildTarget]
       - m_Id: f30fa71ca613ac6419ca21daf55d6649
-        m_Value: http://[PrivateIpAddress]:[HostingServicePort]
+        m_Value: https://graivityturning.blob.core.windows.net/puzzle-data/iOS
     m_ProfileEntryNames:
     - m_Id: 21ebaba44cb0ba443bf5e8f3cc12abc2
       m_Name: BuildTarget

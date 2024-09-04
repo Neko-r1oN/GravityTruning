@@ -21,49 +21,10 @@ EditorBuildSettings:
     path: Assets/02_Scene/ScoreAttack/ScoreHomeScene.unity
     guid: aba484cb565d38d49821976f1f54bfc1
   - enabled: 1
-    path: Assets/02_Scene/ScoreAttack/ScoreAttackScene.unity
-    guid: 977a8f740faf04447b6e663f0ed458b2
-  - enabled: 1
     path: Assets/02_Scene/ScoreAttack/ScoreResultScene.unity
     guid: 16646cfc7431f594cb2af0fde63eb20d
   - enabled: 1
     path: Assets/02_Scene/ScoreAttack/ScoreRankingScene.unity
     guid: 768d3a7d70c256d4fa4e18f8978755bc
-  - enabled: 0
-    path: Assets/02_Scene/GameStages/GameScene1.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
-  - enabled: 0
-    path: Assets/02_Scene/GameStages/GameScene2.unity
-    guid: 3c1f7636c8c285b49b18cd435a9f5a4e
-  - enabled: 0
-    path: Assets/02_Scene/GameStages/GameScene3.unity
-    guid: 3cc4b4a95a9f65e4284434d8fe0edf64
-  - enabled: 0
-    path: Assets/02_Scene/GameStages/GameScene4.unity
-    guid: 8ab66f90ffd29e54584a90c5b2205c31
-  - enabled: 0
-    path: Assets/02_Scene/GameStages/GameScene5.unity
-    guid: 6f9e0e22ac14d8a469231eaf614f740d
-  - enabled: 0
-    path: Assets/02_Scene/GameStages/GameScene6.unity
-    guid: 4fdcf3032c08989459f1583ef2197e13
-  - enabled: 0
-    path: Assets/02_Scene/GameStages/GameScene7.unity
-    guid: 832d765c5e99e2041809951c6637621d
-  - enabled: 0
-    path: Assets/02_Scene/GameStages/GameScene8.unity
-    guid: a1ab9ccbb7d466a468a8972716704c92
-  - enabled: 0
-    path: Assets/02_Scene/GameStages/GameScene9.unity
-    guid: 726231647a178484c9ad3d04256c6df0
-  - enabled: 0
-    path: Assets/02_Scene/GameStages/GameScene10.unity
-    guid: 34b6aea2621c2394cba8f88a6127cf93
-  - enabled: 0
-    path: Assets/02_Scene/GameStages/GameScene11.unity
-    guid: 9a2f69a2cb238074c8bca903db66efca
-  - enabled: 0
-    path: Assets/02_Scene/GameStages/GameScene12.unity
-    guid: 8f3602351ab31304f9a901ae58f425c1
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: c0ac9e5d258b857488ea232c0b2621cd, type: 2}

@@ -2,46 +2,70 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.AddressableAssets;
 
 public class TitleManager : MonoBehaviour
 {
+    [SerializeField] GameObject nameField;
+    [SerializeField] Text nameText;
     private bool isClick;
+
+    bool isSuccess;
     // Start is called before the first frame update
     void Start()
     {
-        isClick = false;
+        nameText.text = "";
+        isClick = true;
+        isSuccess = NetworkManager.Instance.LoadUserData();
+        nameField.SetActive(true);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Return))
-        {
-            if(isClick) return;
-            
-            isClick = true;
 
-            bool isSuccess = NetworkManager.Instance.LoadUserData();
+        if (isSuccess)
+        {
+            nameField.SetActive(false);
+        }
+        if (isClick) return;
+            
+        isClick = true;
+
+        if(nameText.text =="")
+        {
+            nameText.text = "ゲスト";
+        }
+            //StartCoroutine(checkCatalog());
+
+           
+
 
             //ユーザーデータが保存されていない場合
             if (!isSuccess)
             {
                 StartCoroutine(NetworkManager.Instance.StoreUser(
-                    Guid.NewGuid().ToString(),       //名前 
+                    nameText.text,       //名前
                     Guid.NewGuid().ToString(),       //パスワード
-                    result => {                      //登録後の処理
-                        // シーン遷移
-                        Initiate.Fade("HomeScene", new Color(0, 0, 0, 1.0f), 2.0f);
+                    result => {                      //結果
+                                             // シーン繊維
+                        //Initiate.Fade("LoadScene", new Color(0, 0, 0, 1.0f), 2.0f);
                     }));
+                Debug.Log("登録完了");
             }
             //ユーザーデータが保存されている場合
             else
             {
+                Debug.Log("登録済み");
                 // シーン遷移
-                Initiate.Fade("HomeScene", new Color(0, 0, 0, 1.0f), 2.0f);
+                //Initiate.Fade("LoadScene", new Color(0, 0, 0, 1.0f), 2.0f);
             }
-        }
+    }
+
+    public void OnClickStart()
+    {
+         isClick = false;
     }
 
     IEnumerator checkCatalog()
@@ -53,13 +77,13 @@ public class TitleManager : MonoBehaviour
 
         if(updates.Count >= 1)
         {
-            Initiate.Fade("AssetLoader", new Color(0, 0, 0, 1.0f), 2.0f);
+            Initiate.Fade("LoadScene", new Color(0, 0, 0, 1.0f), 2.0f);
         }
         else
         {
             Initiate.Fade("HomeScene", new Color(0, 0, 0, 1.0f), 5.0f);
         }
 
-
     }
+
 }

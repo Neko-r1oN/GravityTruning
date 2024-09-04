@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;  //DOTweenを使うときはこのusingを入れる
-
+using UnityEngine.AddressableAssets;
 
 
 
@@ -21,8 +21,17 @@ public class AttentionText : MonoBehaviour
     [SerializeField]
     Color32 endColor = new Color32(255, 255, 255, 255);
 
+    //ハンドル確認変数
+    private bool isCheck;
+
+    // Start is called before the first frame update
+    
+        
+    
     void Start()
     {
+        isCheck = true;
+
         AttentionTxt = GetComponent<Text>();
         AttentionTxt.color = startColor;
 
@@ -40,15 +49,42 @@ public class AttentionText : MonoBehaviour
 
 
            
-           Invoke("StartHomeScene", 5.0f);
+           Invoke("StartHomeScene", 3.0f);
             
         }
+        if (isCheck) return;
+
+        isCheck = true;
+        StartCoroutine(checkCatalog());
+
     }
 
     public void StartHomeScene()
     {
+        isCheck = false;
+            
+
         // シーン遷移
         Initiate.Fade("LoadScene", new Color(0, 0, 0, 255), 5.0f);
+    }
+
+    IEnumerator checkCatalog()
+    {
+        var checkHandle = Addressables.CheckForCatalogUpdates(false);
+        yield return checkHandle;
+        var updates = checkHandle.Result;
+        Addressables.Release(checkHandle);
+
+        if (updates.Count >= 1)
+        {
+            Initiate.Fade("LoadScene", new Color(0, 0, 0, 1.0f), 2.0f);
+        }
+        else
+        {
+            Initiate.Fade("HomeScene", new Color(0, 0, 0, 1.0f), 5.0f);
+        }
+
+
     }
 
 }
