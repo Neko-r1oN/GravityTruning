@@ -8,10 +8,15 @@ using System.IO;
 
 public class NetworkManager : MonoBehaviour
 {
-    //https通信用
+    //https通信URL
     //https://api-gravityturning.japaneast.cloudapp.azure.com/
-    //https://api-gravityturning.japaneast.cloudapp.azure.com//api/
-    //http://localhost:8000/api
+
+
+    //https通信用
+    //https://api-gravityturning.japaneast.cloudapp.azure.com/api/
+
+    //ローカル(通信確認用)
+    //http://localhost:8000/api/
     const string API_BASE_URL = "https://api-gravityturning.japaneast.cloudapp.azure.com/api/";
     private int userID = 0;
     private string userName = "";
@@ -25,7 +30,7 @@ public class NetworkManager : MonoBehaviour
     {
         get
         {
-            if(instance == null)
+            if (instance == null)
             {
                 GameObject gameObj = new GameObject("NetworkManager");
                 //GameObject生成、NetworkManagerコンポーネントを追加
@@ -96,7 +101,7 @@ public class NetworkManager : MonoBehaviour
     //ユーザー情報読み込み処理
     public bool LoadUserData()
     {
-        if(!File.Exists(Application.persistentDataPath + "/saveData.json"))
+        if (!File.Exists(Application.persistentDataPath + "/saveData.json"))
         {
             return false;
         }
@@ -133,6 +138,33 @@ public class NetworkManager : MonoBehaviour
         }
         else
         {
+            result?.Invoke(null);
+        }
+    }
+
+
+    public IEnumerator GetRanking(Action<RankingResponse[]> result)
+    {
+        //ステージ一覧取得APIを実行
+        UnityWebRequest request = UnityWebRequest.Get(
+            API_BASE_URL + "users/scoreRanking");
+
+        // 結果を受信するまで待機
+        yield return request.SendWebRequest();
+
+        if (request.result == UnityWebRequest.Result.Success
+            && request.responseCode == 200)
+        {
+            // 通信が成功した場合、返ってきたJSONをオブジェクトに変換
+            string resultJson = request.downloadHandler.text;
+            RankingResponse[] response = JsonConvert.DeserializeObject<RankingResponse[]>(resultJson);
+
+            // 呼び出し元のresult処理を呼び出す
+            result?.Invoke(response);
+        }
+        else
+        {
+            // 呼び出し元のresult処理を呼び出す
             result?.Invoke(null);
         }
     }

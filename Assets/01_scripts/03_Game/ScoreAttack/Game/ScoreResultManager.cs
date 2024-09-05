@@ -34,4 +34,10 @@ public class ScoreResultManager : MonoBehaviour
     {
         
     }
+
+    public void OnClickBack()
+    {
+        // ƒV[ƒ“‘JˆÚ
+        Initiate.Fade("ScoreHomeScene", new Color(0, 0, 0, 1.0f), 5.0f);
+    }
 }
