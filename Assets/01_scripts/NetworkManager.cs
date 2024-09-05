@@ -17,6 +17,7 @@ public class NetworkManager : MonoBehaviour
 
     //ローカル(通信確認用)
     //http://localhost:8000/api/
+
     const string API_BASE_URL = "https://api-gravityturning.japaneast.cloudapp.azure.com/api/";
     private int userID = 0;
     private string userName = "";
@@ -25,6 +26,7 @@ public class NetworkManager : MonoBehaviour
 
     //getプロパティを呼び出した初回時に static で保持
     private static NetworkManager instance;
+
 
     public static NetworkManager Instance
     {
@@ -119,27 +121,26 @@ public class NetworkManager : MonoBehaviour
     }
 
     //ステージ情報取得処理
-    public IEnumerator GetStage(Action<StageResponse[]> result)
+    public IEnumerator GetStage(Action<List<StageResponse>> result)
     {
-        //ステージ一覧取得APIを実行
+
         UnityWebRequest request = UnityWebRequest.Get(
             API_BASE_URL + "stageList");
 
-        yield return request.SendWebRequest();
+        yield return request.SendWebRequest();  
+
+        List<StageResponse> response = new List<StageResponse>();
+
         //通信が成功した場合
         if (request.result == UnityWebRequest.Result.Success && request.responseCode == 200)
         {
             //帰ってきたJSONファイルをオブジェクトに変換
             string resultJson = request.downloadHandler.text;
-            StoreUserResponse response = JsonConvert.DeserializeObject<StoreUserResponse>(resultJson);
+            response = JsonConvert.DeserializeObject<List<StageResponse>>(resultJson); 
+        }
 
-            this.userID = response.UserID;
-            SaveUserData();
-        }
-        else
-        {
-            result?.Invoke(null);
-        }
+        // 呼び出し元のresult処理を呼び出す
+        result?.Invoke(response);
     }
 
 
@@ -149,13 +150,11 @@ public class NetworkManager : MonoBehaviour
         UnityWebRequest request = UnityWebRequest.Get(
             API_BASE_URL + "users/scoreRanking");
 
-        // 結果を受信するまで待機
         yield return request.SendWebRequest();
 
-        if (request.result == UnityWebRequest.Result.Success
-            && request.responseCode == 200)
+        if (request.result == UnityWebRequest.Result.Success && request.responseCode == 200)
         {
-            // 通信が成功した場合、返ってきたJSONをオブジェクトに変換
+            //帰ってきたJSONファイルをオブジェクトに変換
             string resultJson = request.downloadHandler.text;
             RankingResponse[] response = JsonConvert.DeserializeObject<RankingResponse[]>(resultJson);
 
