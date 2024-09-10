@@ -7,7 +7,8 @@ using UnityEngine.AddressableAssets;
 
 public class StageSelect : MonoBehaviour
 {
-	static public int stageID;
+    static public string GaneScene;
+    static public int stageID;
 
     //ステージボタンプレハブ
 	[SerializeField] private GameObject stageItemPrefub;
@@ -20,7 +21,9 @@ public class StageSelect : MonoBehaviour
 
     private void Start()
     {
-		stageID = 0;
+        stageID = 0;
+
+        GaneScene = "GameScene";
 
         //ステージ情報を取得
         StartCoroutine(NetworkManager.Instance.GetStage(
@@ -49,7 +52,8 @@ public class StageSelect : MonoBehaviour
                 //ステージが存在しない・取得に失敗した場合
                 else
                 {
-                   //エラーテキスト表示
+                    //エラーテキスト表示
+                    Debug.Log("えらー");
                 }
             }));
 
@@ -57,9 +61,12 @@ public class StageSelect : MonoBehaviour
     }
     public void OnStageSelectButtonPressed(int bossID)
 	{
-		// シーン切り替え
-		//SceneManager.LoadScene(bossID + 1);
-		// シーン遷移
-		Addressables.LoadScene(bossID + 1, LoadSceneMode.Single);
+        // シーン切り替え
+        //SceneManager.LoadScene(bossID + 1);
+        stageID = bossID;
+        GaneScene += stageID;
+        Debug.Log(GaneScene);
+        // シーン遷移
+        Addressables.LoadScene(GaneScene, LoadSceneMode.Single);
 	}
 }

@@ -36,8 +36,12 @@ public class SAGameManager : MonoBehaviour
     //Audio再生装置
     AudioSource audioSource;
 
+    private bool sendScore;
     static public string GaneScene;
 
+    NetworkManager networkManager;
+
+    
 
     private void Start()
     {
@@ -52,6 +56,10 @@ public class SAGameManager : MonoBehaviour
 
         BG.SetActive(true);
 
+        sendScore = true;
+        //userID = NetworkManager.userID;
+        //userName = NetworkManager.userName;
+        
         GaneScene = "GameScene";
 
     }
@@ -96,8 +104,15 @@ public class SAGameManager : MonoBehaviour
 
                     CountText.text = "Finish";
                     SceneChangeCount -= Time.deltaTime;
+            
+                    if (sendScore)
+                    {
+                        Store();
 
-                    if(SceneChangeCount <= 0)
+
+                        sendScore = false;
+                    }
+                    if (SceneChangeCount <= 0)
                     {
                         // シーン遷移
                         Initiate.Fade("ScoreResultScene", new Color(0, 0, 0, 1.0f), 5.0f);
@@ -110,6 +125,17 @@ public class SAGameManager : MonoBehaviour
 
     }
        
+    private void Store()
+    {
+        StartCoroutine(NetworkManager.Instance.StoreScore(
+                            ScoreManager.score,       //スコア
+                            result =>
+                            {                      //結果
+                                Debug.Log("成功");
+                                // シーン繊維
+                                //Initiate.Fade("LoadScene", new Color(0, 0, 0, 1.0f), 2.0f);
+                            }));
+    }
     
     public void OnClikStop()
     {

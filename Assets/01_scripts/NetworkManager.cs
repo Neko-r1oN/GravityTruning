@@ -19,10 +19,13 @@ public class NetworkManager : MonoBehaviour
     //http://localhost:8000/api/
 
     const string API_BASE_URL = "https://api-gravityturning.japaneast.cloudapp.azure.com/api/";
-    private int userID = 0;
-    private string userName = "";
-    private string password = "";
 
+    public int userID = 0;
+    public string userName = "";
+    private string password = "";
+    /*static public int userID { get; private set; }
+    static public string userName { get; private set; }
+    static public string passWord { get; private set; }*/
 
     //getプロパティを呼び出した初回時に static で保持
     private static NetworkManager instance;
@@ -121,50 +124,86 @@ public class NetworkManager : MonoBehaviour
     }
 
     //ステージ情報取得処理
-    public IEnumerator GetStage(Action<List<StageResponse>> result)
+    public IEnumerator GetStage(Action<StageResponse[]> result)
     {
 
         UnityWebRequest request = UnityWebRequest.Get(
             API_BASE_URL + "stageList");
 
-        yield return request.SendWebRequest();  
+        yield return request.SendWebRequest();
 
-        List<StageResponse> response = new List<StageResponse>();
+        StageResponse[] response = null;
+        //Rootobject response = new Rootobject();
 
         //通信が成功した場合
         if (request.result == UnityWebRequest.Result.Success && request.responseCode == 200)
         {
             //帰ってきたJSONファイルをオブジェクトに変換
             string resultJson = request.downloadHandler.text;
-            response = JsonConvert.DeserializeObject<List<StageResponse>>(resultJson); 
+            Debug.Log(resultJson);
+            response = JsonConvert.DeserializeObject<StageResponse[]>(resultJson);
+            
         }
 
         // 呼び出し元のresult処理を呼び出す
         result?.Invoke(response);
     }
 
-
-    public IEnumerator GetRanking(Action<RankingResponse[]> result)
+    //スコアランキング一覧取得API
+    public IEnumerator GetScoreRanking(Action<ScoreRankingResponse[]> result)
     {
         //ステージ一覧取得APIを実行
         UnityWebRequest request = UnityWebRequest.Get(
-            API_BASE_URL + "users/scoreRanking");
+            API_BASE_URL + "scoreRanking");
 
         yield return request.SendWebRequest();
+        ScoreRankingResponse[] response = null;
 
         if (request.result == UnityWebRequest.Result.Success && request.responseCode == 200)
         {
             //帰ってきたJSONファイルをオブジェクトに変換
             string resultJson = request.downloadHandler.text;
-            RankingResponse[] response = JsonConvert.DeserializeObject<RankingResponse[]>(resultJson);
+            response = JsonConvert.DeserializeObject<ScoreRankingResponse[]>(resultJson);
 
-            // 呼び出し元のresult処理を呼び出す
+            Debug.Log("スコア取得完了");
+
+            Debug.Log(resultJson);
+            
+        }
+            //呼び出し元のresult処理を呼び出す
             result?.Invoke(response);
-        }
-        else
+    }
+
+    //スコア送信
+    public IEnumerator StoreScore(int score , Action<bool> result)
+    {
+        //サーバーに送るオブジェクトを作成
+        StoreScoreReqest requestData = new StoreScoreReqest();
+
+        requestData.Id = this.userID;
+        requestData.Name = this.userName;
+        requestData.Score = score;
+
+        //サーバーに送るオブジェクトをJSONに変換
+        string json = JsonConvert.SerializeObject(requestData);
+        //送信
+        UnityWebRequest request = UnityWebRequest.Post(
+            API_BASE_URL + "users/sendScore", json, "application/json");
+
+        yield return request.SendWebRequest();
+        bool isSuccess = false;
+
+        //通信が成功した場合
+        if (request.result == UnityWebRequest.Result.Success && request.responseCode == 200)
         {
-            // 呼び出し元のresult処理を呼び出す
-            result?.Invoke(null);
+            //帰ってきたJSONファイルをオブジェクトに変換
+            string resultJson = request.downloadHandler.text;
+            //StoreScoreReqest response = JsonConvert.DeserializeObject<StoreScoreReqest>(resultJson);
+
+            isSuccess = true;
+
+            Debug.Log("通信送信成功");
         }
+        result?.Invoke(isSuccess);  //ここで呼び出し元のresult処理を呼び出す
     }
 }
