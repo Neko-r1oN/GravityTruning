@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;                   //DOTween‚ðŽg‚¤‚Æ‚«‚Í‚±‚Ìusing‚ð“ü‚ê‚é
 using System.Threading.Tasks;
+using KanKikuchi.AudioManager;       //AudioManager‚ðŽg‚¤‚Æ‚«‚Í‚±‚Ìusing‚ð“ü‚ê‚é
 
 public class SAFieldManager : MonoBehaviour
 {
@@ -111,7 +112,7 @@ public class SAFieldManager : MonoBehaviour
 
     public void TurnLeft()
     {
-
+        SEManager.Instance.Play(SEPath.TAP);
         if (CountDown <= 0)
         {
             if (isGame)
@@ -138,6 +139,7 @@ public class SAFieldManager : MonoBehaviour
 
     public void TurnRight()
     {
+        SEManager.Instance.Play(SEPath.TAP);
         if (CountDown <= 0)
         {
             if (isGame)
@@ -164,7 +166,7 @@ public class SAFieldManager : MonoBehaviour
 
     public void GravityChange()
     {
-
+        SEManager.Instance.Play(SEPath.TAP);
         if (CountDown <= 0)
         {
             if (isGame)

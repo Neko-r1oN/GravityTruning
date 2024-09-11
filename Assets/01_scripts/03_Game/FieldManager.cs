@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;                   //DOTween‚ğg‚¤‚Æ‚«‚Í‚±‚Ìusing‚ğ“ü‚ê‚é
 using System.Threading.Tasks;
-
+using KanKikuchi.AudioManager;       //AudioManager‚ğg‚¤‚Æ‚«‚Í‚±‚Ìusing‚ğ“ü‚ê‚é
 public class FieldManager : MonoBehaviour
 {
     [SerializeField] GameObject Gravity;
@@ -83,7 +83,7 @@ public class FieldManager : MonoBehaviour
 
     public void TurnLeft()
     {
-
+        SEManager.Instance.Play(SEPath.TAP);
         // §ŒÀ’†‚Í“®ì‚³‚¹‚È‚¢
         if (buttonEnabled == false)
         {
@@ -107,6 +107,7 @@ public class FieldManager : MonoBehaviour
 
     public void TurnRight()
     {
+        SEManager.Instance.Play(SEPath.TAP);
         // §ŒÀ’†‚Í“®ì‚³‚¹‚È‚¢
         if (buttonEnabled == false)
         {
@@ -130,7 +131,7 @@ public class FieldManager : MonoBehaviour
 
     public void GravityChange()
     {
-
+        SEManager.Instance.Play(SEPath.TAP);
         if (isGravity)
         {
             Gravity.SetActive(false);

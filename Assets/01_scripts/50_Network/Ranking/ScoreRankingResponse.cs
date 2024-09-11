@@ -5,9 +5,8 @@ using Newtonsoft.Json;
 
 public class ScoreRankingResponse
 {
-
-    [JsonProperty("id")]
-    public int StageID { get; set; }
+    [JsonProperty("user_id")]
+    public int ID { get; set; }
 
     [JsonProperty("user_name")]
     public string UserName { get; set; }

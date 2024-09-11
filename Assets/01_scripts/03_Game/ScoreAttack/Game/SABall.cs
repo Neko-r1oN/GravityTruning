@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using KanKikuchi.AudioManager;       //AudioManagerを使うときはこのusingを入れる
 
 public class SABall : MonoBehaviour
 {
@@ -28,6 +29,7 @@ public class SABall : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Goal"))//さっきつけたTagutukeruというタグがあるオブジェクト限定で～という条件の下
         {
+            SEManager.Instance.Play(SEPath.HIT);
             Rigidbody2D rb = GetComponent<Rigidbody2D>();
             // 速度をいったん０にする。
             rb.velocity = Vector3.zero;

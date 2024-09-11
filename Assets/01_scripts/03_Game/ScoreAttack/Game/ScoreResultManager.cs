@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using KanKikuchi.AudioManager;       //AudioManagerを使うときはこのusingを入れる
 
 public class ScoreResultManager : MonoBehaviour
 {
@@ -18,6 +19,15 @@ public class ScoreResultManager : MonoBehaviour
     // tart is called before the first frame update
     void Start()
     {
+        BGMManager.Instance.Play(
+                        audioPath: BGMPath.SCORE_HOME, //再生したいオーディオのパス
+                        volumeRate: 0.3f,                //音量の倍率
+                        delay: 0,                //再生されるまでの遅延時間
+                        pitch: 1,                //ピッチ
+                        isLoop: true,             //ループ再生するか
+                        allowsDuplicate: false             //他のBGMと重複して再生させるか
+                        );
+
         totalScore = ScoreManager.score;
         baseScore = ScoreManager.basicScore;
         ballNum = ScoreManager.ballNum;

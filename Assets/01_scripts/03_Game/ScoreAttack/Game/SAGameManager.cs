@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.AddressableAssets;
+using KanKikuchi.AudioManager;       //AudioManagerを使うときはこのusingを入れる
 
 public class SAGameManager : MonoBehaviour
 {
@@ -36,6 +38,12 @@ public class SAGameManager : MonoBehaviour
     //Audio再生装置
     AudioSource audioSource;
 
+    private bool isStartBGM;
+    private bool isStartCount1;
+    private bool isStartCount2;
+    private bool isStartCount3;
+    private bool isStartCount4;
+
     private bool sendScore;
     static public string GaneScene;
 
@@ -45,6 +53,9 @@ public class SAGameManager : MonoBehaviour
 
     private void Start()
     {
+        BGMManager.Instance.Stop();
+        
+
         int NextStage = StageSelect.stageID;
         //サウンド再生用
         audioSource = GetComponent<AudioSource>();
@@ -56,6 +67,11 @@ public class SAGameManager : MonoBehaviour
 
         BG.SetActive(true);
 
+        isStartBGM = true;
+        isStartCount1 = true;
+        isStartCount2 = true;
+        isStartCount3 = true;
+        isStartCount4 = true;
         sendScore = true;
         //userID = NetworkManager.userID;
         //userName = NetworkManager.userName;
@@ -75,6 +91,22 @@ public class SAGameManager : MonoBehaviour
 
         if (TitleCountDown <= 1)
         {
+            if(isStartCount1)
+            Invoke("StartCount", 0.0f);
+            isStartCount1 = false;
+
+            if (isStartCount2)
+                Invoke("StartCount", 1.0f);
+            isStartCount2 = false;
+
+            if (isStartCount3)
+                Invoke("StartCount", 2.0f);
+            isStartCount3 = false;
+
+            if (isStartCount4)
+                Invoke("StartCount", 3.0f);
+            isStartCount4 = false;
+
             if (CountDown >= 1)
             {
                 CountDown -= Time.deltaTime;
@@ -85,6 +117,7 @@ public class SAGameManager : MonoBehaviour
 
             if (CountDown <= 1)
             {
+                StartBGM();
                 BG.SetActive(false);
 
                 CountText.text = "";
@@ -98,6 +131,8 @@ public class SAGameManager : MonoBehaviour
                 //countdownが0以下になったとき
                 if (CountTimer <= 0)
                 {
+                    
+
                     //時間を表示する
                     TimerText.text = "0";
                     BG.SetActive(true);
@@ -125,8 +160,29 @@ public class SAGameManager : MonoBehaviour
 
     }
        
+    private void StartBGM()
+    {
+        if(isStartBGM)
+        BGMManager.Instance.Play(
+                      audioPath: BGMPath.SCORE_ATTACK, //再生したいオーディオのパス
+                      volumeRate: 0.8f,                //音量の倍率
+                      delay: 0,                //再生されるまでの遅延時間
+                      pitch: 1,                //ピッチ
+                      isLoop: true,             //ループ再生するか
+                      allowsDuplicate: false             //他のBGMと重複して再生させるか
+                      );
+        isStartBGM = false;
+    }
+    private void StartCount()
+    {
+       SEManager.Instance.Play(SEPath.COUNT_DOWN);
+      
+    }
+
     private void Store()
     {
+        BGMManager.Instance.Stop();
+        SEManager.Instance.Play(SEPath.FINISH);
         StartCoroutine(NetworkManager.Instance.StoreScore(
                             ScoreManager.score,       //スコア
                             result =>
@@ -139,6 +195,7 @@ public class SAGameManager : MonoBehaviour
     
     public void OnClikStop()
     {
+        SEManager.Instance.Play(SEPath.TAP);
         //リザルト画面を非表示
         panelStop.SetActive(true);
         Time.timeScale = 0f;
@@ -146,20 +203,23 @@ public class SAGameManager : MonoBehaviour
     }
     public void OnClikStopBack()
     {
+        SEManager.Instance.Play(SEPath.TAP);
         Time.timeScale = 1f;
         //リザルト画面を非表示
         panelStop.SetActive(false);
     }
     public void OnClikRetry()
     {
+        SEManager.Instance.Play(SEPath.TAP);
         Time.timeScale = 1f;
         // シーン遷移
-        Initiate.Fade("GameResetScene", new Color(0, 0, 0, 1.0f), 5.0f);
+        Addressables.LoadScene("ScoreAttackScene", LoadSceneMode.Single);
 
     }
     /**/
     public void OnClikHome()
     {
+        SEManager.Instance.Play(SEPath.TAP);
         Time.timeScale = 1f;
         // シーン遷移
         Initiate.Fade("HomeScene", new Color(0, 0, 0, 1.0f), 2.0f);
@@ -168,6 +228,7 @@ public class SAGameManager : MonoBehaviour
 
     public void OnClikNext()
     {
+        SEManager.Instance.Play(SEPath.TAP);
         GaneScene = "GameScene";
         int NextStage = StageSelect.stageID + 1;
 

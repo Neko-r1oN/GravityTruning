@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using UnityEngine.AddressableAssets;
-
+using KanKikuchi.AudioManager;       //AudioManagerを使うときはこのusingを入れる
 
 public class GameManager : MonoBehaviour
 {
@@ -22,9 +22,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] int CrearMergeNum;         //クリアに必要な合成回数
     [SerializeField] static public int MasterTurnNum { get; set; }              //残り回転可能回数
     [SerializeField] string goalTextMessage;    //クリアに必要な合成回数
-    //サウンド
-    [SerializeField] AudioClip seDrop;     //落下効果音
-    [SerializeField] AudioClip seMerge;    //合体効果音
+    
 
     
     public int TurnNum;
@@ -34,7 +32,7 @@ public class GameManager : MonoBehaviour
     //生成位置
     const float SpawnItemY = 3.5f;
     //Audio再生装置
-    AudioSource audioSource;
+    //AudioSource audioSource;
 
     static public string GaneScene;
     
@@ -42,9 +40,20 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
 
+        BGMManager.Instance.Stop();
+        BGMManager.Instance.Play(
+            audioPath: BGMPath.NORMAL_BGM, //再生したいオーディオのパス
+            volumeRate: 0.4f,                //音量の倍率
+            delay: 0,                //再生されるまでの遅延時間
+            pitch: 1,                //ピッチ
+            isLoop: true,             //ループ再生するか
+            allowsDuplicate: false             //他のBGMと重複して再生させるか
+            );
+
         int NextStage = StageSelect.stageID;
         //サウンド再生用
-        audioSource = GetComponent<AudioSource>();
+        //audioSource = GetComponent<AudioSource>();
+
         //リザルト画面を非表示
         panelResult.SetActive(false);
         //中断画面を非表示
@@ -102,7 +111,8 @@ public class GameManager : MonoBehaviour
 
         //Destroy(newBubble.gameObject);
         //SE再生
-        audioSource.PlayOneShot(seMerge);
+        SEManager.Instance.Play(SEPath.HIT);
+        SEManager.Instance.Play(SEPath.CLUTCH);
 
         //操作中のアイテムとぶつかったらゲームオーバー
         if (MergeNum >= CrearMergeNum)
@@ -117,6 +127,7 @@ public class GameManager : MonoBehaviour
     }
     public void OnClikStop()
     {
+        SEManager.Instance.Play(SEPath.TAP);
         //リザルト画面を非表示
         panelStop.SetActive(true);
         Time.timeScale = 0f;
@@ -124,12 +135,14 @@ public class GameManager : MonoBehaviour
     }
     public void OnClikStopBack()
     {
+        SEManager.Instance.Play(SEPath.TAP);
         Time.timeScale = 1f;
         //リザルト画面を非表示
         panelStop.SetActive(false);
     }
     public void OnClikRetry()
     {
+        SEManager.Instance.Play(SEPath.TAP);
         Time.timeScale = 1f;
         // シーン遷移
         Initiate.Fade("GameResetScene", new Color(0, 0, 0, 1.0f), 5.0f);
@@ -138,6 +151,7 @@ public class GameManager : MonoBehaviour
     /**/
     public void OnClikHome()
     {
+        SEManager.Instance.Play(SEPath.TAP);
         Time.timeScale = 1f;
         // シーン遷移
         Initiate.Fade("HomeScene", new Color(0, 0, 0, 1.0f), 2.0f);
@@ -146,6 +160,7 @@ public class GameManager : MonoBehaviour
 
     public void OnClikNext()
     {
+        SEManager.Instance.Play(SEPath.TAP);
         GaneScene = "GameScene";
         int NextStage = StageSelect.stageID + 1;
 

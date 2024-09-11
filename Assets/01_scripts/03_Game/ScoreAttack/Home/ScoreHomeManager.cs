@@ -9,6 +9,7 @@ using KanKikuchi.AudioManager;       //AudioManagerを使うときはこのusingを入れる
 using DG.Tweening;                   //DOTweenを使うときはこのusingを入れる
 using UnityEngine.SceneManagement;
 
+
 public class ScoreHomeManager : MonoBehaviour
 {
     [SerializeField] Slider BGMSlider;
@@ -29,14 +30,18 @@ public class ScoreHomeManager : MonoBehaviour
         SettingWindow.SetActive(false);
         TutorialWindow.SetActive(false);
 
+        BGMManager.Instance.Stop();
+
         BGMManager.Instance.Play(
-            audioPath: BGMPath.SCORE_ATTACK, //再生したいオーディオのパス
-            volumeRate: 1,                //音量の倍率
-            delay: 0,                //再生されるまでの遅延時間
-            pitch: 1,                //ピッチ
-            isLoop: true,             //ループ再生するか
-            allowsDuplicate: false             //他のBGMと重複して再生させるか
-            );
+           audioPath: BGMPath.SCORE_HOME, //再生したいオーディオのパス
+           volumeRate: 0.3f,                //音量の倍率
+           delay: 0,                //再生されるまでの遅延時間
+           pitch: 1,                //ピッチ
+           isLoop: true,             //ループ再生するか
+           allowsDuplicate: false             //他のBGMと重複して再生させるか
+           );
+
+        
 
     }
 
@@ -45,7 +50,7 @@ public class ScoreHomeManager : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            SEManager.Instance.Play(SEPath.TAP);
+            //SEManager.Instance.Play(SEPath.TAP);
         }
 
         BGMVolume = BGMSlider.value * 0.01f;
@@ -69,26 +74,31 @@ public class ScoreHomeManager : MonoBehaviour
 
     public void OnClickTutorial()
     {
+        SEManager.Instance.Play(SEPath.TAP);
         TutorialWindow.SetActive(true);
 
     }
     public void CloseTutorial()
     {
+        SEManager.Instance.Play(SEPath.TAP);
         TutorialWindow.SetActive(false);
     }
 
     public void OnClickSetting()
     {
+        SEManager.Instance.Play(SEPath.TAP);
         SettingWindow.SetActive(true);
 
     }
     public void CloseSetting()
     {
+        SEManager.Instance.Play(SEPath.TAP);
         SettingWindow.SetActive(false);
     }
 
     public void OnClickRanking()
     {
+        SEManager.Instance.Play(SEPath.TAP);
         //ランキングシーンに遷移
         // シーン遷移
         Initiate.Fade("ScoreRankingScene", new Color(0, 0, 0, 1.0f), 5.0f);
@@ -96,10 +106,14 @@ public class ScoreHomeManager : MonoBehaviour
 
     public void OnClickBackHome()
     {
+        SEManager.Instance.Play(SEPath.TAP);
         //ホームシーンに遷移
         // シーン遷移
         Initiate.Fade("HomeScene", new Color(0, 0, 0, 1.0f), 5.0f);
     }
 
+    public void OnClickNameChange()
+    {
 
+    }
 }

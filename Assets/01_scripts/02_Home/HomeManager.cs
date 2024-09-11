@@ -33,7 +33,7 @@ public class HomeManager : MonoBehaviour
 
         BGMManager.Instance.Play(
             audioPath: BGMPath.HOME, //再生したいオーディオのパス
-            volumeRate: 100,                //音量の倍率
+            volumeRate: 0.4f,                //音量の倍率
             delay: 0,                //再生されるまでの遅延時間
             pitch: 1,                //ピッチ
             isLoop: true,             //ループ再生するか

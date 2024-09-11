@@ -21,6 +21,9 @@ public class NetworkManager : MonoBehaviour
     const string API_BASE_URL = "https://api-gravityturning.japaneast.cloudapp.azure.com/api/";
 
     public int userID = 0;
+
+    static public string pub_UserName { get; private set; }
+    static public int pub_UserID { get; private set; }
     public string userName = "";
     private string password = "";
     /*static public int userID { get; private set; }
@@ -156,6 +159,8 @@ public class NetworkManager : MonoBehaviour
         UnityWebRequest request = UnityWebRequest.Get(
             API_BASE_URL + "scoreRanking");
 
+        pub_UserID = userID;
+
         yield return request.SendWebRequest();
         ScoreRankingResponse[] response = null;
 
@@ -172,6 +177,31 @@ public class NetworkManager : MonoBehaviour
         }
             //呼び出し元のresult処理を呼び出す
             result?.Invoke(response);
+    }
+
+    //スコアランキング一覧取得API
+    public IEnumerator GetMyScoreRanking(Action<ScoreRankingResponse[]> result)
+    {
+        //ステージ一覧取得APIを実行
+        UnityWebRequest request = UnityWebRequest.Get(
+            API_BASE_URL + "getRank/"+userID.ToString());
+
+        yield return request.SendWebRequest();
+        ScoreRankingResponse[] response = null;
+
+        if (request.result == UnityWebRequest.Result.Success && request.responseCode == 200)
+        {
+            //帰ってきたJSONファイルをオブジェクトに変換
+            string resultJson = request.downloadHandler.text;
+            response = JsonConvert.DeserializeObject<ScoreRankingResponse[]>(resultJson);
+
+            Debug.Log("スコア取得完了");
+
+            //Debug.Log(resultJson);
+
+        }
+        //呼び出し元のresult処理を呼び出す
+        result?.Invoke(response);
     }
 
     //スコア送信
