@@ -25,9 +25,12 @@ public class AttentionText : MonoBehaviour
     private bool isCheck;
 
     // Start is called before the first frame update
-    
-        
-    
+
+
+    private void Awake()
+    {
+        Application.targetFrameRate = 60;
+    }
     void Start()
     {
         isCheck = true;
