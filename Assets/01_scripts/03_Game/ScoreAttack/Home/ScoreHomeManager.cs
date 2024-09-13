@@ -19,7 +19,7 @@ public class ScoreHomeManager : MonoBehaviour
     private float BGMVolume;
 
 
-    [SerializeField] Text playerName;
+    //[SerializeField] Text playerName;
     [SerializeField] GameObject SettingWindow;
     [SerializeField] GameObject TutorialWindow;
 

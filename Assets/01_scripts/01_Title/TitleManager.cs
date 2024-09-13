@@ -8,6 +8,10 @@ using UnityEngine.AddressableAssets;
 public class TitleManager : MonoBehaviour
 {
     [SerializeField] GameObject nameField;
+
+    [SerializeField] GameObject dummyButton;
+    [SerializeField] GameObject startButton;
+
     [SerializeField] Text nameText;
     private bool isClick;
 
@@ -19,6 +23,9 @@ public class TitleManager : MonoBehaviour
         isClick = true;
         isSuccess = NetworkManager.Instance.LoadUserData();
         nameField.SetActive(true);
+
+        dummyButton.SetActive(true);
+        startButton.SetActive(false);
     }
 
     // Update is called once per frame
@@ -27,16 +34,29 @@ public class TitleManager : MonoBehaviour
 
         if (isSuccess)
         {
+            dummyButton.SetActive(false);
+            startButton.SetActive(true);
             nameField.SetActive(false);
         }
+        else
+        {
+            if (nameText.text != "")
+            {
+                dummyButton.SetActive(false);
+                startButton.SetActive(true);
+            }
+            else
+            {
+                dummyButton.SetActive(true);
+                startButton.SetActive(false);
+            }
+        }
+        
         if (isClick) return;
             
         isClick = true;
 
-        if(nameText.text =="")
-        {
-            nameText.text = "ÉQÉXÉg";
-        }
+       
             //StartCoroutine(checkCatalog());
 
            

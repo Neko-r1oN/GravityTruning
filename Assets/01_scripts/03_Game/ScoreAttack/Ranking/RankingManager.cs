@@ -56,27 +56,30 @@ public class RankingManager : MonoBehaviour
         myRankNum = 0;
 
         //自分のランキングを取得
-        /*StartCoroutine(NetworkManager.Instance.GetMyScoreRanking(
+        //全体のランキングを取得
+        StartCoroutine(NetworkManager.Instance.GetMyScoreRanking(
             result =>
             {
                 //ステージデータが存在した場合
                 if (result != null)
                 {
 
-                    foreach (ScoreRankingResponse myScoreData in result)
+                    foreach (ScoreRankingResponse scoreData in result)
                     {
                         myRankNum++;
 
-                        //ステージボタン生成
+                        //ランキングアイテム生成
                         GameObject rankItem = Instantiate(rankItemPrefub, Vector3.zero, Quaternion.identity, myScoreRankingPos);
 
                         //スコア順位反映
-                        rankItem.transform.GetChild(1).gameObject.GetComponent<Text>().text = rankNum.ToString();
+                        rankItem.transform.GetChild(1).gameObject.GetComponent<Text>().text = myRankNum.ToString();
                         //該当ユーザー名反映
-                        rankItem.transform.GetChild(2).gameObject.GetComponent<Text>().text = myScoreData.UserName.ToString();
+                        rankItem.transform.GetChild(2).gameObject.GetComponent<Text>().text = scoreData.UserName.ToString();
                         //スコア反映
-                        rankItem.transform.GetChild(3).gameObject.GetComponent<Text>().text = myScoreData.Score.ToString();
-     
+                        rankItem.transform.GetChild(3).gameObject.GetComponent<Text>().text = scoreData.Score.ToString();
+
+                       
+
                     }
                 }
                 //ステージが存在しない・取得に失敗した場合
@@ -85,7 +88,7 @@ public class RankingManager : MonoBehaviour
                     //エラーテキスト表示
                     Debug.Log("えらー");
                 }
-            }));*/
+            }));
 
         //全体のランキングを取得
         StartCoroutine(NetworkManager.Instance.GetScoreRanking(
@@ -99,7 +102,7 @@ public class RankingManager : MonoBehaviour
                     {
                         rankNum++;
 
-                        //ステージボタン生成
+                        //ランキングアイテム生成
                         GameObject rankItem = Instantiate(rankItemPrefub, Vector3.zero, Quaternion.identity, scoreRankingPos);
 
                         //スコア順位反映

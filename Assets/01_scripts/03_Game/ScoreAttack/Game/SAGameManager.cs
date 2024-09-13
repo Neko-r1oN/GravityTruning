@@ -8,8 +8,6 @@ using KanKikuchi.AudioManager;       //AudioManagerを使うときはこのusingを入れる
 
 public class SAGameManager : MonoBehaviour
 {
-    //アイテムのプレハブ
-    [SerializeField] List<BubbleController> prefabBubbles;
 
     //タイトル表示カウントダウン
     float TitleCountDown = 3.0f;
@@ -24,7 +22,7 @@ public class SAGameManager : MonoBehaviour
     [SerializeField] GameObject BG;
 
     [SerializeField] Text TimerText;
-    [SerializeField] GameObject panelResult;
+
     [SerializeField] GameObject panelStop;
 
     //サウンド
@@ -38,14 +36,15 @@ public class SAGameManager : MonoBehaviour
     //Audio再生装置
     AudioSource audioSource;
 
+    //カウントダウン用
     private bool isStartBGM;
     private bool isStartCount1;
     private bool isStartCount2;
     private bool isStartCount3;
     private bool isStartCount4;
 
+    //スコア送信用
     private bool sendScore;
-    static public string GaneScene;
 
     NetworkManager networkManager;
 
@@ -60,8 +59,7 @@ public class SAGameManager : MonoBehaviour
         //サウンド再生用
         audioSource = GetComponent<AudioSource>();
 
-        //リザルト画面を非表示
-        panelResult.SetActive(false);
+       
         //中断画面を非表示
         panelStop.SetActive(false);
 
@@ -73,10 +71,7 @@ public class SAGameManager : MonoBehaviour
         isStartCount3 = true;
         isStartCount4 = true;
         sendScore = true;
-        //userID = NetworkManager.userID;
-        //userName = NetworkManager.userName;
-        
-        GaneScene = "GameScene";
+       
 
     }
 
@@ -223,20 +218,6 @@ public class SAGameManager : MonoBehaviour
         Time.timeScale = 1f;
         // シーン遷移
         Initiate.Fade("HomeScene", new Color(0, 0, 0, 1.0f), 2.0f);
-
-    }
-
-    public void OnClikNext()
-    {
-        SEManager.Instance.Play(SEPath.TAP);
-        GaneScene = "GameScene";
-        int NextStage = StageSelect.stageID + 1;
-
-        GaneScene += NextStage;
-        Debug.Log(GaneScene);
-        StageSelect.stageID = NextStage;
-        // シーン遷移
-        Initiate.Fade(GaneScene, new Color(0, 0, 0, 1), 2.0f);
 
     }
 }

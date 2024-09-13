@@ -1060,7 +1060,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Game Crear
+  m_Text: Game Clear
 --- !u!222 &657330137
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1688,7 +1688,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1640549624}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
         m_MethodName: OnClikStopBack
         m_Mode: 1
@@ -1905,7 +1905,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1640549624}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
         m_MethodName: OnClikHome
         m_Mode: 1
@@ -2590,7 +2590,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1640549624}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
         m_MethodName: OnClikNext
         m_Mode: 1
@@ -2873,7 +2873,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1640549624}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
         m_MethodName: OnClikRetry
         m_Mode: 1
@@ -3138,7 +3138,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1640549624}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
         m_MethodName: OnClikHome
         m_Mode: 1
@@ -3271,7 +3271,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1640549624}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
         m_MethodName: OnClikRetry
         m_Mode: 1

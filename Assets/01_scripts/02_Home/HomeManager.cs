@@ -11,6 +11,8 @@ public class HomeManager : MonoBehaviour
     [SerializeField] GameObject BuckButton;
     [SerializeField] GameObject StageSelector;
 
+    //[SerializeField] Text userName;
+
     [SerializeField] Slider BGMSlider;
     [SerializeField] Slider SESlider;
 
@@ -25,6 +27,8 @@ public class HomeManager : MonoBehaviour
 
     void Start()
     {
+
+        //userName.text = NetworkManager.pub_UserName;
 
         StartButton.SetActive(true);
         BuckButton.SetActive(false);

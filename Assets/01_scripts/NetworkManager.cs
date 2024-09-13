@@ -33,7 +33,7 @@ public class NetworkManager : MonoBehaviour
     //getプロパティを呼び出した初回時に static で保持
     private static NetworkManager instance;
 
-
+   
     public static NetworkManager Instance
     {
         get
