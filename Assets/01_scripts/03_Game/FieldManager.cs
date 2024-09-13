@@ -83,7 +83,13 @@ public class FieldManager : MonoBehaviour
 
     public void TurnLeft()
     {
-        SEManager.Instance.Play(SEPath.TAP);
+        SEManager.Instance.Play(
+            audioPath: SEPath.TAP, //再生したいオーディオのパス
+            volumeRate: 0.2f,                //音量の倍率
+            delay: 0,                //再生されるまでの遅延時間
+            pitch: 1,                //ピッチ
+            isLoop: false             //ループ再生するか
+            );
         // 制限中は動作させない
         if (buttonEnabled == false)
         {
@@ -107,7 +113,13 @@ public class FieldManager : MonoBehaviour
 
     public void TurnRight()
     {
-        SEManager.Instance.Play(SEPath.TAP);
+        SEManager.Instance.Play(
+           audioPath: SEPath.TAP, //再生したいオーディオのパス
+           volumeRate: 0.2f,                //音量の倍率
+           delay: 0,                //再生されるまでの遅延時間
+           pitch: 1,                //ピッチ
+           isLoop: false             //ループ再生するか
+           );
         // 制限中は動作させない
         if (buttonEnabled == false)
         {
@@ -131,7 +143,13 @@ public class FieldManager : MonoBehaviour
 
     public void GravityChange()
     {
-        SEManager.Instance.Play(SEPath.TAP);
+        SEManager.Instance.Play(
+           audioPath: SEPath.TAP, //再生したいオーディオのパス
+           volumeRate: 0.2f,                //音量の倍率
+           delay: 0,                //再生されるまでの遅延時間
+           pitch: 1,                //ピッチ
+           isLoop: false             //ループ再生するか
+           );
         if (isGravity)
         {
             Gravity.SetActive(false);

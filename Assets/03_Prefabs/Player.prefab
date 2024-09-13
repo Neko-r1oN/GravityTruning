@@ -99,7 +99,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 160.8
+  m_Mass: 107.47
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1.21
@@ -146,9 +146,9 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.003635435, y: 0}
+  m_Offset: {x: -0.010279119, y: 0}
   serializedVersion: 2
-  m_Radius: 0.48544577
+  m_Radius: 0.3990783
 --- !u!114 &2797382646799896852
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -162,5 +162,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SceneDirector: {fileID: 0}
+  SceneDirectorSA: {fileID: 0}
   ColorType: 1
   IsMerged: 0

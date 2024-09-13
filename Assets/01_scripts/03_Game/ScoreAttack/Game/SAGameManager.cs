@@ -160,7 +160,7 @@ public class SAGameManager : MonoBehaviour
         if(isStartBGM)
         BGMManager.Instance.Play(
                       audioPath: BGMPath.SCORE_ATTACK, //再生したいオーディオのパス
-                      volumeRate: 0.8f,                //音量の倍率
+                      volumeRate: 0.2f,                //音量の倍率
                       delay: 0,                //再生されるまでの遅延時間
                       pitch: 1,                //ピッチ
                       isLoop: true,             //ループ再生するか
@@ -170,14 +170,26 @@ public class SAGameManager : MonoBehaviour
     }
     private void StartCount()
     {
-       SEManager.Instance.Play(SEPath.COUNT_DOWN);
-      
+        SEManager.Instance.Play(
+            audioPath: SEPath.COUNT_DOWN, //再生したいオーディオのパス
+            volumeRate: 0.2f,                //音量の倍率
+            delay: 0,                //再生されるまでの遅延時間
+            pitch: 1,                //ピッチ
+            isLoop: false             //ループ再生するか
+            );
+
     }
 
     private void Store()
     {
         BGMManager.Instance.Stop();
-        SEManager.Instance.Play(SEPath.FINISH);
+        SEManager.Instance.Play(
+           audioPath: SEPath.FINISH, //再生したいオーディオのパス
+           volumeRate: 0.3f,                //音量の倍率
+           delay: 0,                //再生されるまでの遅延時間
+           pitch: 1,                //ピッチ
+           isLoop: false             //ループ再生するか
+           );
         StartCoroutine(NetworkManager.Instance.StoreScore(
                             ScoreManager.score,       //スコア
                             result =>
@@ -190,7 +202,13 @@ public class SAGameManager : MonoBehaviour
     
     public void OnClikStop()
     {
-        SEManager.Instance.Play(SEPath.TAP);
+        SEManager.Instance.Play(
+           audioPath: SEPath.TAP, //再生したいオーディオのパス
+           volumeRate: 0.2f,                //音量の倍率
+           delay: 0,                //再生されるまでの遅延時間
+           pitch: 1,                //ピッチ
+           isLoop: false             //ループ再生するか
+           );
         //リザルト画面を非表示
         panelStop.SetActive(true);
         Time.timeScale = 0f;
@@ -198,14 +216,26 @@ public class SAGameManager : MonoBehaviour
     }
     public void OnClikStopBack()
     {
-        SEManager.Instance.Play(SEPath.TAP);
+        SEManager.Instance.Play(
+           audioPath: SEPath.TAP, //再生したいオーディオのパス
+           volumeRate: 0.2f,                //音量の倍率
+           delay: 0,                //再生されるまでの遅延時間
+           pitch: 1,                //ピッチ
+           isLoop: false             //ループ再生するか
+           );
         Time.timeScale = 1f;
         //リザルト画面を非表示
         panelStop.SetActive(false);
     }
     public void OnClikRetry()
     {
-        SEManager.Instance.Play(SEPath.TAP);
+        SEManager.Instance.Play(
+           audioPath: SEPath.TAP, //再生したいオーディオのパス
+           volumeRate: 0.2f,                //音量の倍率
+           delay: 0,                //再生されるまでの遅延時間
+           pitch: 1,                //ピッチ
+           isLoop: false             //ループ再生するか
+           );
         Time.timeScale = 1f;
         // シーン遷移
         Addressables.LoadScene("ScoreAttackScene", LoadSceneMode.Single);
@@ -214,7 +244,13 @@ public class SAGameManager : MonoBehaviour
     /**/
     public void OnClikHome()
     {
-        SEManager.Instance.Play(SEPath.TAP);
+        SEManager.Instance.Play(
+           audioPath: SEPath.TAP, //再生したいオーディオのパス
+           volumeRate: 0.2f,                //音量の倍率
+           delay: 0,                //再生されるまでの遅延時間
+           pitch: 1,                //ピッチ
+           isLoop: false             //ループ再生するか
+           );
         Time.timeScale = 1f;
         // シーン遷移
         Initiate.Fade("HomeScene", new Color(0, 0, 0, 1.0f), 2.0f);

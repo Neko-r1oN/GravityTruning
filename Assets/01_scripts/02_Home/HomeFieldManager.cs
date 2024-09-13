@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;                   //DOTweenを使うときはこのusingを入れる
+using KanKikuchi.AudioManager;       //AudioManagerを使うときはこのusingを入れる
 
 public class HomeFieldManager : MonoBehaviour
 {
@@ -69,6 +70,13 @@ public class HomeFieldManager : MonoBehaviour
        
         if (!isClick1 && num1 ==0)
         {
+            SEManager.Instance.Play(
+           audioPath: SEPath.TAP, //再生したいオーディオのパス
+           volumeRate: 0.2f,                //音量の倍率
+           delay: 0,                //再生されるまでの遅延時間
+           pitch: 1,                //ピッチ
+           isLoop: false             //ループ再生するか
+           );
             isStart = true;
             isClick1 = true;
             num1++;
@@ -80,6 +88,13 @@ public class HomeFieldManager : MonoBehaviour
 
     public void isStartScore()
     {
+        SEManager.Instance.Play(
+           audioPath: SEPath.TAP, //再生したいオーディオのパス
+           volumeRate: 0.2f,                //音量の倍率
+           delay: 0,                //再生されるまでの遅延時間
+           pitch: 1,                //ピッチ
+           isLoop: false             //ループ再生するか
+           );
         if (!isScore && num2 == 0)
         {
             isScore = true;
@@ -91,8 +106,8 @@ public class HomeFieldManager : MonoBehaviour
 
     public void GravityChange()
     {
-
-          if (isGravity)
+        
+        if (isGravity)
           {
               Gravity.SetActive(false);
               isGravity = false;
@@ -109,6 +124,7 @@ public class HomeFieldManager : MonoBehaviour
 
     public void ChangeScene()
     {
+      
         // シーン遷移
         Initiate.Fade("ScoreHomeScene", new Color(0, 0, 0, 1.0f), 7.0f);
     }

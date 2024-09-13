@@ -34,7 +34,7 @@ public class ScoreHomeManager : MonoBehaviour
 
         BGMManager.Instance.Play(
            audioPath: BGMPath.SCORE_HOME, //再生したいオーディオのパス
-           volumeRate: 0.3f,                //音量の倍率
+           volumeRate: 0.1f,                //音量の倍率
            delay: 0,                //再生されるまでの遅延時間
            pitch: 1,                //ピッチ
            isLoop: true,             //ループ再生するか
@@ -74,31 +74,61 @@ public class ScoreHomeManager : MonoBehaviour
 
     public void OnClickTutorial()
     {
-        SEManager.Instance.Play(SEPath.TAP);
+        SEManager.Instance.Play(
+           audioPath: SEPath.TAP, //再生したいオーディオのパス
+           volumeRate: 0.2f,                //音量の倍率
+           delay: 0,                //再生されるまでの遅延時間
+           pitch: 1,                //ピッチ
+           isLoop: false             //ループ再生するか
+           );
         TutorialWindow.SetActive(true);
 
     }
     public void CloseTutorial()
     {
-        SEManager.Instance.Play(SEPath.TAP);
+        SEManager.Instance.Play(
+            audioPath: SEPath.TAP, //再生したいオーディオのパス
+            volumeRate: 0.2f,                //音量の倍率
+            delay: 0,                //再生されるまでの遅延時間
+            pitch: 1,                //ピッチ
+            isLoop: false             //ループ再生するか
+            );
         TutorialWindow.SetActive(false);
     }
 
     public void OnClickSetting()
     {
-        SEManager.Instance.Play(SEPath.TAP);
+        SEManager.Instance.Play(
+           audioPath: SEPath.TAP, //再生したいオーディオのパス
+           volumeRate: 0.2f,                //音量の倍率
+           delay: 0,                //再生されるまでの遅延時間
+           pitch: 1,                //ピッチ
+           isLoop: false             //ループ再生するか
+           );
         SettingWindow.SetActive(true);
 
     }
     public void CloseSetting()
     {
-        SEManager.Instance.Play(SEPath.TAP);
+        SEManager.Instance.Play(
+           audioPath: SEPath.TAP, //再生したいオーディオのパス
+           volumeRate: 0.2f,                //音量の倍率
+           delay: 0,                //再生されるまでの遅延時間
+           pitch: 1,                //ピッチ
+           isLoop: false             //ループ再生するか
+           );
         SettingWindow.SetActive(false);
     }
 
     public void OnClickRanking()
     {
-        SEManager.Instance.Play(SEPath.TAP);
+        SEManager.Instance.Play(
+            audioPath: SEPath.TAP, //再生したいオーディオのパス
+            volumeRate: 0.2f,                //音量の倍率
+            delay: 0,                //再生されるまでの遅延時間
+            pitch: 1,                //ピッチ
+            isLoop: false             //ループ再生するか
+            );
         //ランキングシーンに遷移
         // シーン遷移
         Initiate.Fade("ScoreRankingScene", new Color(0, 0, 0, 1.0f), 5.0f);
@@ -106,14 +136,17 @@ public class ScoreHomeManager : MonoBehaviour
 
     public void OnClickBackHome()
     {
-        SEManager.Instance.Play(SEPath.TAP);
+        SEManager.Instance.Play(
+            audioPath: SEPath.TAP, //再生したいオーディオのパス
+            volumeRate: 0.2f,                //音量の倍率
+            delay: 0,                //再生されるまでの遅延時間
+            pitch: 1,                //ピッチ
+            isLoop: false             //ループ再生するか
+            );
         //ホームシーンに遷移
         // シーン遷移
         Initiate.Fade("HomeScene", new Color(0, 0, 0, 1.0f), 5.0f);
     }
 
-    public void OnClickNameChange()
-    {
-
-    }
+    
 }

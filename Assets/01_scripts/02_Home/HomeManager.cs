@@ -37,7 +37,7 @@ public class HomeManager : MonoBehaviour
 
         BGMManager.Instance.Play(
             audioPath: BGMPath.HOME, //再生したいオーディオのパス
-            volumeRate: 0.4f,                //音量の倍率
+            volumeRate: 0.2f,                //音量の倍率
             delay: 0,                //再生されるまでの遅延時間
             pitch: 1,                //ピッチ
             isLoop: true,             //ループ再生するか
@@ -49,11 +49,7 @@ public class HomeManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
-        {
-            SEManager.Instance.Play(SEPath.TAP);
-        }
-
+       
         //スライダーの値を音量に反映
         BGMVolume = BGMSlider.value * 0.01f;
         SEVolume = SESlider.value * 0.01f;
@@ -68,6 +64,14 @@ public class HomeManager : MonoBehaviour
 
     public void OnClickSelectStage()
     {
+        SEManager.Instance.Play(
+           audioPath: SEPath.TAP, //再生したいオーディオのパス
+           volumeRate: 0.2f,                //音量の倍率
+           delay: 0,                //再生されるまでの遅延時間
+           pitch: 1,                //ピッチ
+           isLoop: false             //ループ再生するか
+           );
+
         BGMManager.Instance.ChangeBaseVolume(0.0f);
         BuckButton.SetActive(true);
         StageSelector.SetActive(true);
@@ -78,15 +82,28 @@ public class HomeManager : MonoBehaviour
 
     public void OnClickSetting()
     {
+        SEManager.Instance.Play(
+           audioPath: SEPath.TAP, //再生したいオーディオのパス
+           volumeRate: 0.2f,                //音量の倍率
+           delay: 0,                //再生されるまでの遅延時間
+           pitch: 1,                //ピッチ
+           isLoop: false             //ループ再生するか
+           );
         SettingWindow.SetActive(true);
 
     }
 
     public void OnClickSelectReturn()
     {
-       
 
-        Invoke("CloseSelect", 0.5f);
+        SEManager.Instance.Play(
+           audioPath: SEPath.TAP, //再生したいオーディオのパス
+           volumeRate: 0.2f,                //音量の倍率
+           delay: 0,                //再生されるまでの遅延時間
+           pitch: 1,                //ピッチ
+           isLoop: false             //ループ再生するか
+           );
+       CloseSelect();
 
         
 
@@ -94,11 +111,19 @@ public class HomeManager : MonoBehaviour
 
     public void CloseSetting()
     {
+        SEManager.Instance.Play(
+           audioPath: SEPath.TAP, //再生したいオーディオのパス
+           volumeRate: 0.2f,                //音量の倍率
+           delay: 0,                //再生されるまでの遅延時間
+           pitch: 1,                //ピッチ
+           isLoop: false             //ループ再生するか
+           );
         SettingWindow.SetActive(false);
     }
 
     public void CloseSelect()
     {
+        
         StageSelector.SetActive(false);
         BuckButton.SetActive(false);
 

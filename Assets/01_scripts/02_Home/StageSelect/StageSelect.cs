@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using UnityEngine.AddressableAssets;
+using KanKikuchi.AudioManager;       //AudioManagerを使うときはこのusingを入れる
 
 public class StageSelect : MonoBehaviour
 {
@@ -61,6 +62,13 @@ public class StageSelect : MonoBehaviour
     }
     public void OnStageSelectButtonPressed(int bossID)
 	{
+        SEManager.Instance.Play(
+           audioPath: SEPath.TAP, //再生したいオーディオのパス
+           volumeRate: 0.2f,                //音量の倍率
+           delay: 0,                //再生されるまでの遅延時間
+           pitch: 1,                //ピッチ
+           isLoop: false             //ループ再生するか
+           );
         // シーン切り替え
         //SceneManager.LoadScene(bossID + 1);
         stageID = bossID;
