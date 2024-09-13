@@ -62,25 +62,30 @@ public class TitleManager : MonoBehaviour
            
 
 
-            //ユーザーデータが保存されていない場合
-            if (!isSuccess)
-            {
-                StartCoroutine(NetworkManager.Instance.StoreUser(
-                    nameText.text,       //名前
-                    Guid.NewGuid().ToString(),       //パスワード
-                    result => {                      //結果
-                                             // シーン繊維
-                        //Initiate.Fade("LoadScene", new Color(0, 0, 0, 1.0f), 2.0f);
+            
+    }
+
+    public void UserCreate()
+    {
+        //ユーザーデータが保存されていない場合
+        if (!isSuccess)
+        {
+            StartCoroutine(NetworkManager.Instance.StoreUser(
+                nameText.text,       //名前
+                Guid.NewGuid().ToString(),       //パスワード
+                result => {                      //結果
+                                                 // シーン繊維
+                                                 //Initiate.Fade("LoadScene", new Color(0, 0, 0, 1.0f), 2.0f);
                     }));
-                Debug.Log("登録完了");
-            }
-            //ユーザーデータが保存されている場合
-            else
-            {
-                Debug.Log("登録済み");
-                // シーン遷移
-                //Initiate.Fade("LoadScene", new Color(0, 0, 0, 1.0f), 2.0f);
-            }
+            Debug.Log("登録完了");
+        }
+        //ユーザーデータが保存されている場合
+        else
+        {
+            Debug.Log("登録済み");
+            // シーン遷移
+            //Initiate.Fade("LoadScene", new Color(0, 0, 0, 1.0f), 2.0f);
+        }
     }
 
    
