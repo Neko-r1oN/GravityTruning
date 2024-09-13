@@ -34,7 +34,7 @@ public class AttentionText : MonoBehaviour
 
         AttentionTxt = GetComponent<Text>();
         AttentionTxt.color = startColor;
-
+        Invoke("StartHomeScene", 3.0f);
         timer = 0.0f;
     }
 
@@ -44,28 +44,17 @@ public class AttentionText : MonoBehaviour
         if (timer >= 0.5f)
         {
             AttentionTxt.color = Color.Lerp(AttentionTxt.color, new Color(1, 1, 1, 1), 2.0f * Time.deltaTime);
-
-
-
-
-           
-           Invoke("StartHomeScene", 3.0f);
             
         }
-        if (isCheck) return;
-
-        isCheck = true;
-        StartCoroutine(checkCatalog());
 
     }
 
     public void StartHomeScene()
     {
         isCheck = false;
-            
 
-        // ÉVÅ[ÉìëJà⁄
-        Initiate.Fade("LoadScene", new Color(0, 0, 0, 255), 5.0f);
+
+        StartCoroutine(checkCatalog());
     }
 
     IEnumerator checkCatalog()
