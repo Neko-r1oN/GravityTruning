@@ -37,6 +37,11 @@ public class RankingManager : MonoBehaviour
     //ランキングハイスコア(個人)
     [SerializeField] private Text myScore;
 
+    //ランキング読み込みテキスト(個人)
+    [SerializeField] private GameObject rankText;
+    //ランキングビュー(個人)生成位置取得用
+    [SerializeField] private GameObject myRankText;
+
     //ランキング順位用変数
     private int rankNum;
     //ランキング順位用変数
@@ -50,6 +55,9 @@ public class RankingManager : MonoBehaviour
         myScore.text = "----";
         allRankingObj.SetActive(true);
         myRankingObj.SetActive(false);
+
+        rankText.SetActive(true);
+        myRankText.SetActive(true);
 
         //ランクリセット
         rankNum = 0;
@@ -79,8 +87,8 @@ public class RankingManager : MonoBehaviour
                         rankItem.transform.GetChild(3).gameObject.GetComponent<Text>().text = scoreData.Score.ToString();
 
                        
-
                     }
+                    myRankText.SetActive(false);
                 }
                 //ステージが存在しない・取得に失敗した場合
                 else
@@ -119,6 +127,7 @@ public class RankingManager : MonoBehaviour
                         }
 
                     }
+                    rankText.SetActive(false);
                 }
                 //ステージが存在しない・取得に失敗した場合
                 else

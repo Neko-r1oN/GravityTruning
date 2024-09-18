@@ -8,9 +8,7 @@ public class BubbleController : MonoBehaviour
     //シーンディレクター
     public GameManager SceneDirector;
 
-    //シーンディレクター
-    public SAGameManager SceneDirectorSA;
-
+    
     //カラー
     public int ColorType;
     //合体済みフラグ

@@ -2525,7 +2525,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1622455314
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2679,7 +2679,6 @@ MonoBehaviour:
   - {fileID: 672538090638451593, guid: c8c9f096dcb93c443836d697cdac21ac, type: 3}
   stageText: {fileID: 675224830}
   goalText: {fileID: 804245854}
-  textScore: {fileID: 1134838081}
   TurnText: {fileID: 227660257}
   panelResult: {fileID: 1444133724}
   panelStop: {fileID: 373143859}

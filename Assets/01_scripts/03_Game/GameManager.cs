@@ -14,7 +14,6 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] Text stageText;
     [SerializeField] Text goalText;
-    [SerializeField] Text textScore;
     [SerializeField] Text TurnText;
     [SerializeField] GameObject panelResult;
     [SerializeField] GameObject panelStop;
