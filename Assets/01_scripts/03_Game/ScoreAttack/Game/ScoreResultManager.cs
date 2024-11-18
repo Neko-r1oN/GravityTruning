@@ -7,16 +7,16 @@ using KanKikuchi.AudioManager;       //AudioManagerを使うときはこのusingを入れる
 public class ScoreResultManager : MonoBehaviour
 {
 
-    [SerializeField] Text TotalText;
-    [SerializeField] Text BaseText;
-    [SerializeField] Text BallText;
-    [SerializeField] Text ScaleText;
+    [SerializeField] Text totalText;
+    [SerializeField] Text baseText;
+    [SerializeField] Text ballText;
+    [SerializeField] Text scaleText;
 
     int totalScore;  //合計得点
     int ballNum;     //ボール総数
     int baseScore;   //基本得点
     float scalePoint;  //得点倍率
-    // tart is called before the first frame update
+    
     void Start()
     {
         BGMManager.Instance.Play(
@@ -33,10 +33,10 @@ public class ScoreResultManager : MonoBehaviour
         ballNum = ScoreManager.ballNum;
         scalePoint = ScoreManager.pointScale;
 
-        TotalText.text = "" + totalScore;
-        BaseText.text = "" + baseScore;
-        BallText.text = "" + ballNum;
-        ScaleText.text = "" + scalePoint;
+        totalText.text = "" + totalScore;
+        baseText.text = "" + baseScore;
+        ballText.text = "" + ballNum;
+        scaleText.text = "" + scalePoint;
     }
 
     // Update is called once per frame

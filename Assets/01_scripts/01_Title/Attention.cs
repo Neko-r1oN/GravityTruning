@@ -9,23 +9,20 @@ using UnityEngine.AddressableAssets;
 
 public class AttentionText : MonoBehaviour
 {
-    private Text AttentionTxt;
+    private Text attentionTxt;
 
     private float timer;    //繰り返す間隔
 
     [Header("スタートカラー")]
     [SerializeField]
     Color32 startColor = new Color32(255, 255, 255, 0);
-    //ループ終了(折り返し)時の色を0～255までの整数で指定。
+    
     [Header("エンドカラー")]
     [SerializeField]
     Color32 endColor = new Color32(255, 255, 255, 255);
 
     //ハンドル確認変数
     private bool isCheck;
-
-    // Start is called before the first frame update
-
 
     private void Awake()
     {
@@ -35,8 +32,8 @@ public class AttentionText : MonoBehaviour
     {
         isCheck = true;
 
-        AttentionTxt = GetComponent<Text>();
-        AttentionTxt.color = startColor;
+        attentionTxt = GetComponent<Text>();
+        attentionTxt.color = startColor;
         Invoke("StartHomeScene", 3.0f);
         timer = 0.0f;
     }
@@ -46,16 +43,14 @@ public class AttentionText : MonoBehaviour
         timer += Time.deltaTime;     //時間をカウントする
         if (timer >= 0.5f)
         {
-            AttentionTxt.color = Color.Lerp(AttentionTxt.color, new Color(1, 1, 1, 1), 2.0f * Time.deltaTime);
-            
+            attentionTxt.color = Color.Lerp(attentionTxt.color, new Color(1, 1, 1, 1), 2.0f * Time.deltaTime);
         }
-
     }
+
 
     public void StartHomeScene()
     {
         isCheck = false;
-
 
         StartCoroutine(checkCatalog());
     }
@@ -75,8 +70,5 @@ public class AttentionText : MonoBehaviour
         {
             Initiate.Fade("HomeScene", new Color(0, 0, 0, 1.0f), 5.0f);
         }
-
-
     }
-
 }

@@ -8,34 +8,34 @@ using KanKikuchi.AudioManager;       //AudioManagerを使うときはこのusingを入れる
 
 public class SAFieldManager : MonoBehaviour
 {
-    [SerializeField] GameObject Gravity;
-    [SerializeField] GameObject Grid;
+    [SerializeField] GameObject gravity;
+    [SerializeField] GameObject grid;
 
-    private bool TurnL;
-    private bool TurnR;
-    private bool TurnFlag;
+    private bool turnL;
+    private bool turnR;
+    private bool turnFlag;
 
     private bool button;
-    private float Angle;
+    private float angle;
     private bool isGravity;
 
     private bool buttonEnabled = true;
     private WaitForSeconds waitOneSecond = new WaitForSeconds(0.3f);
 
     //開始カウントダウン
-    float CountDown = 5.0f;
+    float countDown = 5.0f;
     //開始カウントダウン
-    float CountTimer = 40.0f;
+    float countTimer = 40.0f;
 
     private bool isGame;
 
     private void Start()
     {
-        TurnL = false;
-        TurnR = false;
-        TurnFlag = true;
+        turnL = false;
+        turnR = false;
+        turnFlag = true;
         isGravity = true;
-        Angle = 0f;
+        angle = 0f;
 
         isGame = false;
 
@@ -44,19 +44,19 @@ public class SAFieldManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (CountDown >= 0)
+        if (countDown >= 0)
         {
-            CountDown -= Time.deltaTime;
+            countDown -= Time.deltaTime;
 
         }
 
-        if (CountDown <= 0)
+        if (countDown <= 0)
         {
             isGame = true;
 
-            CountTimer -= Time.deltaTime;
+            countTimer -= Time.deltaTime;
             //countdownが0以下になったとき
-            if (CountTimer <= 0)
+            if (countTimer <= 0)
             {
                 isGame = false;
             }
@@ -66,17 +66,17 @@ public class SAFieldManager : MonoBehaviour
 
             }
 
-            if (TurnL == true || Input.GetKeyDown(KeyCode.RightArrow))
+            if (turnL == true || Input.GetKeyDown(KeyCode.RightArrow))
             {
 
-                if (TurnFlag == true)
+                if (turnFlag == true)
                 {
-                    GameManager.MasterTurnNum--;
+                    GameManager.masterTurnNum--;
                     CancelInvoke("ResetGrid");
-                    Angle -= 60f;
+                    angle -= 60f;
 
 
-                    TurnL = false;
+                    turnL = false;
                     //左
                     //transform.Rotate(0f, 0f, -60f * Time.deltaTime);
 
@@ -85,16 +85,16 @@ public class SAFieldManager : MonoBehaviour
             }
 
 
-            if (TurnR == true || Input.GetKeyDown(KeyCode.LeftArrow))
+            if (turnR == true || Input.GetKeyDown(KeyCode.LeftArrow))
             {
 
-                if (TurnFlag == true)
+                if (turnFlag == true)
                 {
-                    GameManager.MasterTurnNum--;
+                    GameManager.masterTurnNum--;
                     CancelInvoke("ResetGrid");
-                    Angle += 60f;
+                    angle += 60f;
 
-                    TurnR = false;
+                    turnR = false;
                     //右
                     //transform.Rotate(0f, 0f, 60f * Time.deltaTime);
                     Invoke("ResetGrid", 0.7f);
@@ -102,7 +102,7 @@ public class SAFieldManager : MonoBehaviour
 
             }
 
-            this.transform.DORotate(new Vector3(-4.869f, 0f, Angle), 0.3f);
+            this.transform.DORotate(new Vector3(-4.869f, 0f, angle), 0.3f);
 
         }
 
@@ -119,7 +119,7 @@ public class SAFieldManager : MonoBehaviour
            pitch: 1,                //ピッチ
            isLoop: false             //ループ再生するか
            );
-        if (CountDown <= 0)
+        if (countDown <= 0)
         {
             if (isGame)
             {
@@ -136,8 +136,8 @@ public class SAFieldManager : MonoBehaviour
 
                     // 一定時間経過後に解除
                     StartCoroutine(EnableButton());
-                    Grid.SetActive(false);
-                    TurnL = true;
+                    grid.SetActive(false);
+                    turnL = true;
                 }
             }
         }
@@ -152,7 +152,7 @@ public class SAFieldManager : MonoBehaviour
            pitch: 1,                //ピッチ
            isLoop: false             //ループ再生するか
            );
-        if (CountDown <= 0)
+        if (countDown <= 0)
         {
             if (isGame)
             {
@@ -169,8 +169,8 @@ public class SAFieldManager : MonoBehaviour
 
                     // 一定時間経過後に解除
                     StartCoroutine(EnableButton());
-                    Grid.SetActive(false);
-                    TurnR = true;
+                    grid.SetActive(false);
+                    turnR = true;
                 }
             }
         }
@@ -185,13 +185,13 @@ public class SAFieldManager : MonoBehaviour
            pitch: 1,                //ピッチ
            isLoop: false             //ループ再生するか
            );
-        if (CountDown <= 0)
+        if (countDown <= 0)
         {
             if (isGame)
             { 
                 if (isGravity)
                 {
-                    Gravity.SetActive(false);
+                    gravity.SetActive(false);
                     isGravity = false;
 
                     Invoke("ResetGravity", 1.0f);
@@ -203,13 +203,13 @@ public class SAFieldManager : MonoBehaviour
 
     private void ResetGravity()
     {
-        Gravity.SetActive(true);
+        gravity.SetActive(true);
         isGravity = true;
     }
 
     private void ResetGrid()
     {
-        Grid.SetActive(true);
+        grid.SetActive(true);
     }
 
     // ボタンの制限を解除するコルーチン

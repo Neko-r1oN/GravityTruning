@@ -5,24 +5,20 @@ using KanKikuchi.AudioManager;       //AudioManager‚ğg‚¤‚Æ‚«‚Í‚±‚Ìusing‚ğ“ü‚ê‚é
 
 public class SABall : MonoBehaviour
 {
-    private bool RespownFlag;
-    private float Gravity;
+    private bool respownFlag;
+    private float gravity;
+
     // Start is called before the first frame update
     void Start()
     {
-        Gravity = 1.21f;
+        gravity = 1.21f;
         
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-       
-    }
-
+   
     void OnGravity()
     { //—‚¿‚È‚¢‚æ‚¤‚Éd—Í‚ğ0‚É‚·‚é
-        GetComponent<Rigidbody2D>().gravityScale = Gravity;
+        GetComponent<Rigidbody2D>().gravityScale = gravity;
 
     }
     void OnCollisionEnter2D(Collision2D collision)

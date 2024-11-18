@@ -7,15 +7,16 @@ using UnityEngine.UI;
 
 public class HomeManager : MonoBehaviour
 {
-    [SerializeField] GameObject StartButton;
-    [SerializeField] GameObject BuckButton;
-    [SerializeField] GameObject StageSelector;
 
-    //[SerializeField] Text userName;
+    [SerializeField] GameObject startButton;
+    [SerializeField] GameObject buckButton;
+    [SerializeField] GameObject stageSelector;
 
+    //音響関係
     [SerializeField] Slider BGMSlider;
     [SerializeField] Slider SESlider;
 
+    //各音量変数
     private float SEVolume;
     private float BGMVolume;
 
@@ -27,12 +28,9 @@ public class HomeManager : MonoBehaviour
 
     void Start()
     {
-
-        //userName.text = NetworkManager.pub_UserName;
-
-        StartButton.SetActive(true);
-        BuckButton.SetActive(false);
-        StageSelector.SetActive(false);
+        startButton.SetActive(true);
+        buckButton.SetActive(false);
+        stageSelector.SetActive(false);
         SettingWindow.SetActive(false);
 
         BGMManager.Instance.Play(
@@ -43,10 +41,9 @@ public class HomeManager : MonoBehaviour
             isLoop: true,             //ループ再生するか
             allowsDuplicate: false             //他のBGMと重複して再生させるか
             );
-
     }
 
-    // Update is called once per frame
+   
     void Update()
     {
        
@@ -73,10 +70,10 @@ public class HomeManager : MonoBehaviour
            );
 
         BGMManager.Instance.ChangeBaseVolume(0.0f);
-        BuckButton.SetActive(true);
-        StageSelector.SetActive(true);
+        buckButton.SetActive(true);
+        stageSelector.SetActive(true);
 
-        StartButton.SetActive(false);
+        startButton.SetActive(false);
 
     }
 
@@ -105,8 +102,6 @@ public class HomeManager : MonoBehaviour
            );
        CloseSelect();
 
-        
-
     }
 
     public void CloseSetting()
@@ -124,9 +119,9 @@ public class HomeManager : MonoBehaviour
     public void CloseSelect()
     {
         
-        StageSelector.SetActive(false);
-        BuckButton.SetActive(false);
+        stageSelector.SetActive(false);
+        buckButton.SetActive(false);
 
-        StartButton.SetActive(true);
+        startButton.SetActive(true);
     }
 }

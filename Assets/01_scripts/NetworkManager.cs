@@ -26,6 +26,8 @@ public class NetworkManager : MonoBehaviour
     static public int pub_UserID { get; private set; }
     public string userName = "";
     private string password = "";
+    private string authToken; //APIトークン
+
     /*static public int userID { get; private set; }
     static public string userName { get; private set; }
     static public string passWord { get; private set; }*/
@@ -71,6 +73,8 @@ public class NetworkManager : MonoBehaviour
         yield return request.SendWebRequest();
         bool isSuccess = false;
 
+       
+
         //通信が成功した場合
         if (request.result == UnityWebRequest.Result.Success && request.responseCode == 200)
         {
@@ -82,6 +86,7 @@ public class NetworkManager : MonoBehaviour
             this.userName = name;
             this.password = password;
             this.userID = response.UserID;
+            //this.authToken = response.AuthToken;
             SaveUserData();
             isSuccess = true;
         }
@@ -95,6 +100,7 @@ public class NetworkManager : MonoBehaviour
         SaveData saveData = new SaveData();
         saveData.Name = this.userName;
         saveData.UserID = this.userID;
+        saveData.AuthToken = this.authToken;
         string json = JsonConvert.SerializeObject(saveData);
 
         //ファイルにJsonを保存
@@ -121,10 +127,39 @@ public class NetworkManager : MonoBehaviour
         //ローカルファイルから各種値を取得
         this.userID = saveData.UserID;
         this.userName = saveData.Name;
+        this.authToken = saveData.AuthToken;
         //読み込み判定
         return true;
 
     }
+
+
+    //トークン生成処理  ※ユーザーが登録済み且つTokenがnullの場合のみ実行
+    public IEnumerator CreateToken(Action<bool>response)
+    {
+        var requestData = new
+        {
+            user_id = this.userID,
+        };
+
+        string json = JsonConvert.SerializeObject(requestData);
+        UnityWebRequest request = UnityWebRequest.Post(API_BASE_URL + "users/createToken", json, "application/json");    //トークン生成用のAPIURLを記入
+
+        yield return request.SendWebRequest();
+        if(request.result == UnityWebRequest.Result.Success)
+        {
+            //帰ってきたJSONファイルをオブジェクトに変換
+            string resultJson = request.downloadHandler.text;
+            CreateTokenResponse tokenResponse = JsonConvert.DeserializeObject<CreateTokenResponse>(resultJson);
+
+            //ファイルにユーザーを保存
+            this.userID = tokenResponse.AuthToken;
+            //this.authToken = response.AuthToken;
+            SaveUserData();
+        }
+        response?.Invoke(request.result == UnityWebRequest.Result.Success);
+    }
+
 
     //ステージ情報取得処理
     public IEnumerator GetStage(Action<StageResponse[]> result)

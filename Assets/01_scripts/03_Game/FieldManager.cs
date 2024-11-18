@@ -6,49 +6,49 @@ using System.Threading.Tasks;
 using KanKikuchi.AudioManager;       //AudioManagerを使うときはこのusingを入れる
 public class FieldManager : MonoBehaviour
 {
-    [SerializeField] GameObject Gravity;
-    [SerializeField] GameObject Grid;
+    [SerializeField] GameObject gravity;    //重力
+    [SerializeField] GameObject grid;       //ボール落下ガイド
 
-    private bool TurnL;
-    private bool TurnR;
-    private bool TurnFlag;
+    private bool turnL;
+    private bool turnR;
+    private bool turnFlag;
 
     private bool button;
-    private float Angle;
+    private float angle;
     private bool isGravity;
 
     private bool buttonEnabled = true;
     private WaitForSeconds waitOneSecond = new WaitForSeconds(0.3f);
     
 
-    private int TurnNum;
+    private int turnNum;
 
     private void Start()
     {
-        TurnL = false;
-        TurnR = false;
-        TurnFlag = true;
+        turnL = false;
+        turnR = false;
+        turnFlag = true;
         isGravity = true;
-        Angle = 0f;
+        angle = 0f;
         
     }
     // Update is called once per frame
     void Update()
     {
 
-        TurnNum = GameManager.MasterTurnNum;
-        if (TurnL == true || Input.GetKeyDown(KeyCode.RightArrow))
+        turnNum = GameManager.masterTurnNum;
+        if (turnL == true || Input.GetKeyDown(KeyCode.RightArrow))
         {
           
-            if (TurnNum > 0 && TurnFlag == true)
+            if (turnNum > 0 && turnFlag == true)
             {
-                GameManager.MasterTurnNum--;
-                TurnNum = GameManager.MasterTurnNum;
+                GameManager.masterTurnNum--;
+                turnNum = GameManager.masterTurnNum;
                 CancelInvoke("ResetGrid");
-                Angle -= 60f;
+                angle -= 60f;
 
 
-                TurnL = false;
+                turnL = false;
                 //左
                 //transform.Rotate(0f, 0f, -60f * Time.deltaTime);
 
@@ -57,17 +57,17 @@ public class FieldManager : MonoBehaviour
         }
 
 
-        if (TurnR == true || Input.GetKeyDown(KeyCode.LeftArrow))
+        if (turnR == true || Input.GetKeyDown(KeyCode.LeftArrow))
         {
            
-            if (TurnNum > 0 && TurnFlag == true)
+            if (turnNum > 0 && turnFlag == true)
             {
-                GameManager.MasterTurnNum--;
-                TurnNum = GameManager.MasterTurnNum;
+                GameManager.masterTurnNum--;
+                turnNum = GameManager.masterTurnNum;
                 CancelInvoke("ResetGrid");
-                Angle += 60f;
+                angle += 60f;
 
-                TurnR = false;
+                turnR = false;
                 //右
                 //transform.Rotate(0f, 0f, 60f * Time.deltaTime);
                 Invoke("ResetGrid", 0.7f);
@@ -75,7 +75,7 @@ public class FieldManager : MonoBehaviour
 
         }
 
-        this.transform.DORotate(new Vector3(-4.869f, 0f, Angle), 0.3f);
+        this.transform.DORotate(new Vector3(-4.869f, 0f, angle), 0.3f);
 
        
     }
@@ -99,15 +99,15 @@ public class FieldManager : MonoBehaviour
         else
         {
 
-            Debug.Log(TurnNum);
-            TurnNum--;
+            Debug.Log(turnNum);
+            turnNum--;
             // ボタンを制限する
             buttonEnabled = false;
 
             // 一定時間経過後に解除
             StartCoroutine(EnableButton());
-            Grid.SetActive(false);
-            TurnL = true;
+            grid.SetActive(false);
+            turnL = true;
         }
     }
 
@@ -129,15 +129,15 @@ public class FieldManager : MonoBehaviour
         else
         {
 
-            Debug.Log(TurnNum);
-            TurnNum--;
+            Debug.Log(turnNum);
+            turnNum--;
             // ボタンを制限する
             buttonEnabled = false;
 
             // 一定時間経過後に解除
             StartCoroutine(EnableButton());
-            Grid.SetActive(false);
-            TurnR = true;
+            grid.SetActive(false);
+            turnR = true;
         }
     }
 
@@ -152,7 +152,7 @@ public class FieldManager : MonoBehaviour
            );
         if (isGravity)
         {
-            Gravity.SetActive(false);
+            gravity.SetActive(false);
             isGravity = false;
 
             Invoke("ResetGravity", 1.0f);
@@ -166,16 +166,16 @@ public class FieldManager : MonoBehaviour
 
     private void ResetGravity()
     {
-        Gravity.SetActive(true);
+        gravity.SetActive(true);
         isGravity = true;
     }
 
     private void ResetGrid()
     {
-        Grid.SetActive(true);
-        if (TurnNum <= 0)
+        grid.SetActive(true);
+        if (turnNum <= 0)
         {
-            TurnFlag = false;
+            turnFlag = false;
         }
     }
 

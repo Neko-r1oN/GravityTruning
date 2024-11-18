@@ -6,7 +6,7 @@ using System;
 public class SAGoal : MonoBehaviour
 {
     public ScoreManager scoreManager;
-    public bool HitFlag;
+    public bool hitFlag;
 
     public float posX;
     public float posY;
@@ -38,15 +38,13 @@ public class SAGoal : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        if(HitFlag == true)
+        if(hitFlag == true)
         {
             scoreManager.AddScore();
-            HitFlag = false;
+            hitFlag = false;
         }
-        
-
     }
+
     private void RandumX()
     {
         System.Random randX = new System.Random();

@@ -4,17 +4,17 @@ using UnityEngine;
 
 public class HomeBall : MonoBehaviour
 {
-    private float Gravity;
+    private float gravity;
     // Start is called before the first frame update
     void Start()
     {
-        Gravity = 0.5f;
+        gravity = 0.5f;
         
     }
 
     void OnGravity()
     { //óéÇøÇ»Ç¢ÇÊÇ§Ç…èdóÕÇ0Ç…Ç∑ÇÈ
-        GetComponent<Rigidbody2D>().gravityScale = Gravity;
+        GetComponent<Rigidbody2D>().gravityScale = gravity;
 
     }
     void OnCollisionEnter2D(Collision2D collision)

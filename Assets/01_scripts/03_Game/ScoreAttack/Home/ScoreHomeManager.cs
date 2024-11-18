@@ -20,15 +20,15 @@ public class ScoreHomeManager : MonoBehaviour
 
 
     //[SerializeField] Text playerName;
-    [SerializeField] GameObject SettingWindow;
-    [SerializeField] GameObject TutorialWindow;
+    [SerializeField] GameObject settingWindow;
+    [SerializeField] GameObject tutorialWindow;
 
 
 
     void Start()
     {
-        SettingWindow.SetActive(false);
-        TutorialWindow.SetActive(false);
+        settingWindow.SetActive(false);
+        tutorialWindow.SetActive(false);
 
         BGMManager.Instance.Stop();
 
@@ -81,7 +81,7 @@ public class ScoreHomeManager : MonoBehaviour
            pitch: 1,                //ピッチ
            isLoop: false             //ループ再生するか
            );
-        TutorialWindow.SetActive(true);
+        tutorialWindow.SetActive(true);
 
     }
     public void CloseTutorial()
@@ -93,7 +93,7 @@ public class ScoreHomeManager : MonoBehaviour
             pitch: 1,                //ピッチ
             isLoop: false             //ループ再生するか
             );
-        TutorialWindow.SetActive(false);
+        tutorialWindow.SetActive(false);
     }
 
     public void OnClickSetting()
@@ -105,7 +105,7 @@ public class ScoreHomeManager : MonoBehaviour
            pitch: 1,                //ピッチ
            isLoop: false             //ループ再生するか
            );
-        SettingWindow.SetActive(true);
+        settingWindow.SetActive(true);
 
     }
     public void CloseSetting()
@@ -117,7 +117,7 @@ public class ScoreHomeManager : MonoBehaviour
            pitch: 1,                //ピッチ
            isLoop: false             //ループ再生するか
            );
-        SettingWindow.SetActive(false);
+        settingWindow.SetActive(false);
     }
 
     public void OnClickRanking()

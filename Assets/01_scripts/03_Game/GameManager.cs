@@ -18,22 +18,22 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject panelResult;
     [SerializeField] GameObject panelStop;
 
-    [SerializeField] int CrearMergeNum;         //クリアに必要な合成回数
-    [SerializeField] static public int MasterTurnNum { get; set; }              //残り回転可能回数
+    [SerializeField] int crearMergeNum;         //クリアに必要な合成回数
+    [SerializeField] static public int masterTurnNum { get; set; }              //残り回転可能回数
     [SerializeField] string goalTextMessage;    //クリアに必要な合成回数
     
 
     
-    public int TurnNum;
-    int MergeNum;
+    public int turnNum;
+    int mergeNum;
     //現在のアイテム
     BubbleController currentBubble;
     //生成位置
-    const float SpawnItemY = 3.5f;
+    const float spawnItemY = 3.5f;
     //Audio再生装置
     //AudioSource audioSource;
 
-    static public string GaneScene;
+    static public string ganeScene;
     
 
     private void Start()
@@ -58,14 +58,14 @@ public class GameManager : MonoBehaviour
         //中断画面を非表示
         panelStop.SetActive(false);
         //合計Merge数初期化
-        MasterTurnNum = TurnNum;
+        masterTurnNum = turnNum;
 
         //goalText = "ボール";
 
         stageText.text = "Stage:" + StageSelect.stageID;
         goalText.text = goalTextMessage;
 
-        GaneScene = "GameScene";
+        ganeScene = "GameScene";
 
         //最初のアイテムを生成
         //StartCoroutine(SpawnCurrentItem());
@@ -73,22 +73,22 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        TurnText.text = ""+ MasterTurnNum;
+        TurnText.text = ""+ masterTurnNum;
     }
 
     //アイテムを合体させる
     public void Merge(BubbleController bubbleA,BubbleController bubbleB)
     {
-        MergeNum++;
+        mergeNum++;
        
         //マージ済み
-        if (bubbleA.IsMerged || bubbleB.IsMerged) return;
+        if (bubbleA.isMerged || bubbleB.isMerged) return;
 
         //違う色
-        if (bubbleA.ColorType != bubbleB.ColorType) return;
+        if (bubbleA.colorType != bubbleB.colorType) return;
 
         //次に用意してあるリストの最大数を超える
-        int nextColor = bubbleA.ColorType + 1;
+        int nextColor = bubbleA.colorType + 1;
         if (prefabBubbles.Count - 1 < nextColor) return;
 
         //2点間の中心
@@ -98,8 +98,8 @@ public class GameManager : MonoBehaviour
         //BubbleController newBubble = SpawnItem(lerpPosition, nextColor);
 
         //マージ済みフラグON
-        bubbleA.IsMerged = true;
-        bubbleB.IsMerged = true;
+        bubbleA.isMerged = true;
+        bubbleB.isMerged = true;
 
         Destroy(bubbleA.gameObject);
         Destroy(bubbleB.gameObject);
@@ -126,7 +126,7 @@ public class GameManager : MonoBehaviour
             );
 
         //操作中のアイテムとぶつかったらゲームオーバー
-        if (MergeNum >= CrearMergeNum)
+        if (mergeNum >= crearMergeNum)
         {
             //このUpdate内に入らないようにする
             enabled = false;
@@ -202,13 +202,13 @@ public class GameManager : MonoBehaviour
            pitch: 1,                //ピッチ
            isLoop: false             //ループ再生するか
            );
-        GaneScene = "GameScene";
+        ganeScene = "GameScene";
         int NextStage = StageSelect.stageID + 1;
 
-        GaneScene += NextStage;
-        Debug.Log(GaneScene);
+        ganeScene += NextStage;
+        Debug.Log(ganeScene);
         StageSelect.stageID = NextStage;
         // シーン遷移
-        Addressables.LoadScene(GaneScene, LoadSceneMode.Single);
+        Addressables.LoadScene(ganeScene, LoadSceneMode.Single);
     }
 }

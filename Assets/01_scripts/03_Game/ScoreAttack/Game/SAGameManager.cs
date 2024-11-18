@@ -10,18 +10,18 @@ public class SAGameManager : MonoBehaviour
 {
 
     //タイトル表示カウントダウン
-    float TitleCountDown = 3.0f;
+    float titleCountDown = 3.0f;
     
     //開始カウントダウン
-    public Text CountText;
-    float CountDown = 4.0f;
-    int Count;
+    public Text countText;
+    float countDown = 4.0f;
+    int count;
 
-    float SceneChangeCount = 2.0f;
+    float sceneChangeCount = 2.0f;
 
     [SerializeField] GameObject BG;
 
-    [SerializeField] Text TimerText;
+    [SerializeField] Text timerText;
 
     [SerializeField] GameObject panelStop;
 
@@ -31,7 +31,7 @@ public class SAGameManager : MonoBehaviour
 
 
     //タイマー
-    public float CountTimer = 40;
+    public float countTimer = 40;
 
     //Audio再生装置
     AudioSource audioSource;
@@ -49,17 +49,14 @@ public class SAGameManager : MonoBehaviour
     NetworkManager networkManager;
 
     
-
     private void Start()
     {
         BGMManager.Instance.Stop();
         
-
         int NextStage = StageSelect.stageID;
         //サウンド再生用
         audioSource = GetComponent<AudioSource>();
 
-       
         //中断画面を非表示
         panelStop.SetActive(false);
 
@@ -71,20 +68,17 @@ public class SAGameManager : MonoBehaviour
         isStartCount3 = true;
         isStartCount4 = true;
         sendScore = true;
-       
-
     }
 
     private void Update()
     {
-        if (TitleCountDown >= 1)
+        if (titleCountDown >= 1)
         {
-            TitleCountDown -= Time.deltaTime;
-            CountText.text = "Score Attack";
-
+            titleCountDown -= Time.deltaTime;
+            countText.text = "Score Attack";
         }
 
-        if (TitleCountDown <= 1)
+        if (titleCountDown <= 1)
         {
             if(isStartCount1)
             Invoke("StartCount", 0.0f);
@@ -102,38 +96,38 @@ public class SAGameManager : MonoBehaviour
                 Invoke("StartCount", 3.0f);
             isStartCount4 = false;
 
-            if (CountDown >= 1)
+            if (countDown >= 1)
             {
-                CountDown -= Time.deltaTime;
-                Count = (int)CountDown;
-                CountText.text = Count.ToString();
+                countDown -= Time.deltaTime;
+                count = (int)countDown;
+                countText.text = count.ToString();
 
             }
 
-            if (CountDown <= 1)
+            if (countDown <= 1)
             {
                 StartBGM();
                 BG.SetActive(false);
 
-                CountText.text = "";
+                countText.text = "";
 
                 //時間をカウントダウンする
-                CountTimer -= Time.deltaTime;
+                countTimer -= Time.deltaTime;
 
                 //時間を表示する
-                TimerText.text = CountTimer.ToString("f1") + "";
+                timerText.text = countTimer.ToString("f1") + "";
 
                 //countdownが0以下になったとき
-                if (CountTimer <= 0)
+                if (countTimer <= 0)
                 {
                     
 
                     //時間を表示する
-                    TimerText.text = "0";
+                    timerText.text = "0";
                     BG.SetActive(true);
 
-                    CountText.text = "Finish";
-                    SceneChangeCount -= Time.deltaTime;
+                    countText.text = "Finish";
+                    sceneChangeCount -= Time.deltaTime;
             
                     if (sendScore)
                     {
@@ -142,7 +136,7 @@ public class SAGameManager : MonoBehaviour
 
                         sendScore = false;
                     }
-                    if (SceneChangeCount <= 0)
+                    if (sceneChangeCount <= 0)
                     {
                         // シーン遷移
                         Initiate.Fade("ScoreResultScene", new Color(0, 0, 0, 1.0f), 5.0f);
@@ -180,6 +174,7 @@ public class SAGameManager : MonoBehaviour
 
     }
 
+    //スコア送信
     private void Store()
     {
         BGMManager.Instance.Stop();
@@ -190,6 +185,7 @@ public class SAGameManager : MonoBehaviour
            pitch: 1,                //ピッチ
            isLoop: false             //ループ再生するか
            );
+
         StartCoroutine(NetworkManager.Instance.StoreScore(
                             ScoreManager.score,       //スコア
                             result =>

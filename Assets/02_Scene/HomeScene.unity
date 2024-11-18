@@ -4144,10 +4144,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4b54b476c2ae7642a693e9a9d94d4b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nameField: {fileID: 825973952}
-  dummyButton: {fileID: 294561777}
-  startButton: {fileID: 1524134305}
-  nameText: {fileID: 926854558}
+  nameField: {fileID: 0}
+  nameText: {fileID: 0}
+  dummyButton: {fileID: 0}
+  startButton: {fileID: 0}
 --- !u!4 &1589215055
 Transform:
   m_ObjectHideFlags: 0
@@ -4767,9 +4767,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e229d8875b87a574c977d978776e4481, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StartButton: {fileID: 294561777}
-  BuckButton: {fileID: 2100132569}
-  StageSelector: {fileID: 1543275}
+  startButton: {fileID: 0}
+  buckButton: {fileID: 0}
+  stageSelector: {fileID: 0}
   BGMSlider: {fileID: 557058115}
   SESlider: {fileID: 1541310602}
   SettingWindow: {fileID: 581880511}

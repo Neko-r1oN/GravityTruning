@@ -5,7 +5,7 @@ using System;
 
 public class HomeGoal : MonoBehaviour
 {
-    public bool HitFlag;
+    public bool hitFlag;
 
     public float posX;
     public float posY;
@@ -32,10 +32,10 @@ public class HomeGoal : MonoBehaviour
     void Update()
     {
 
-        if(HitFlag == true)
+        if(hitFlag == true)
         {
             
-            HitFlag = false;
+            hitFlag = false;
         }
         
 

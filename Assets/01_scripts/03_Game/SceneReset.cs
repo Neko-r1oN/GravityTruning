@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class SceneReset : MonoBehaviour
 {
-    private string GaneScene;
+    private string ganeScene;
 
     // Start is called before the first frame update
     void Start()
@@ -18,15 +18,15 @@ public class SceneReset : MonoBehaviour
     // Update is called once per frame
     private void ResetScene()
     {
-        GaneScene = "GameScene";
+        ganeScene = "GameScene";
         
 
-        GaneScene += StageSelect.stageID;
-        Debug.Log(GaneScene);
+        ganeScene += StageSelect.stageID;
+        Debug.Log(ganeScene);
 
         // ÉVÅ[ÉìëJà⁄
 
-        Addressables.LoadScene(GaneScene, LoadSceneMode.Single);
+        Addressables.LoadScene(ganeScene, LoadSceneMode.Single);
 
     }
 }

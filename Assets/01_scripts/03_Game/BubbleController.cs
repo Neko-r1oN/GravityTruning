@@ -6,13 +6,12 @@ using UnityEngine.SceneManagement;
 public class BubbleController : MonoBehaviour
 {
     //シーンディレクター
-    public GameManager SceneDirector;
+    public GameManager sceneDirector;
 
-    
     //カラー
-    public int ColorType;
+    public int colorType;
     //合体済みフラグ
-    public bool IsMerged;
+    public bool isMerged;
 
     
 
@@ -25,8 +24,6 @@ public class BubbleController : MonoBehaviour
             // シーン遷移
             Initiate.Fade("GameResetScene", new Color(0, 0, 0, 1.0f), 5.0f);
         }
-
-        
     }
 
     //当たり判定が発生したら呼ばれる
@@ -37,7 +34,6 @@ public class BubbleController : MonoBehaviour
         if (!bubble) return;
 
         //合体させる
-        SceneDirector.Merge(this, bubble);
-        
+        sceneDirector.Merge(this, bubble);
     }
 }
